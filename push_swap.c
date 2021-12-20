@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "push_swap.h"
 
 
@@ -17,7 +16,9 @@ int main(int args, char **argv)
 	arr[1] = 2;
 	arr[2] = 3;
 	arr[3] = 4;
- 	create_list(&stka_first, &stka_last, arr, 4);
+ 	create_list(&stka_first, &stka_last, arr, 2);
+
+	//stack_swap(stka_last, STACK_A);
 
 	temp = stka_first;
 	while (temp != NULL)
@@ -38,4 +39,5 @@ int main(int args, char **argv)
 		temp2 = temp2->prev;
 	}
 	return (0);
+	
 }
