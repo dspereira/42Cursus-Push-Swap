@@ -41,16 +41,17 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 }
 
-void create_list(t_list **first, t_list **last, int *list_elem, int size)
+void create_list(t_stack *stack, int *content, int size)
 {
 	int i;
 	
 	i = 0;
 	while(i < size)
 	{
-		ft_lstadd_front(first, ft_lstnew(list_elem[i]));
+		ft_lstadd_front(&(stack->first_elem), ft_lstnew(content[i]));
 		if (i == 0)
-			*last = *first;
+			stack->last_elem = stack->first_elem;
 		i++;
 	}
+	stack->size = size;
 }

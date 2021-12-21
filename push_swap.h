@@ -14,15 +14,23 @@ typedef struct s_list
     struct s_list	*prev;
 }	t_list;
 
+
+typedef struct s_stack
+{
+	int id;	
+	int size;
+	t_list *first_elem;
+	t_list *last_elem;
+}	t_stack;
+
+
 // list
 t_list	*ft_lstnew(int content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-
-// Melhorar o nome dos parametros
-void create_list(t_list **first, t_list **last, int *list_elem, int size);
+void create_list(t_stack *stack, int *content, int size);
 
 // stack movements
-void stack_swap(t_list *last_elem, int stack);
-void stack_rotate(t_list **first_elem, t_list **last_elem, int stack);
-void stack_reverse_rotate(t_list **first_elem, t_list **last_elem, int stack);
+void stack_swap(t_stack *stack);
+void stack_rotate(t_stack *stack);
+void stack_reverse_rotate(t_stack *stack);
