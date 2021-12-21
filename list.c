@@ -20,9 +20,25 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 	if (*lst)
 	{
 		new->next = *lst;
+		new->prev = NULL;
 		(*lst)->prev = new;
 	}
 	*lst = new; 
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	if (!new)
+		return ;
+	if (!(*lst))
+		*lst = new;
+	else
+	{
+		(*lst)->next = new;
+		new->next = NULL;
+		new->prev = *lst;
+		*lst = new;
+	}
 }
 
 void create_list(t_list **first, t_list **last, int *list_elem, int size)
