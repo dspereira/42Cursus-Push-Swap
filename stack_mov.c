@@ -1,5 +1,8 @@
 #include "push_swap.h"
 
+/*
+Falta testar todas as funções em situaçãos em que só existem 1 ou 2 elementos ou stack vazia
+*/
 
 void swap_content(t_list *elem1, t_list *elem2)
 {
@@ -35,21 +38,6 @@ void stack_rotate(t_stack *stack)
 		write(1, "rb\n", 3);*/
 }
 
-
-void stack_reverse_rotate1(t_list **first_elem, t_list **last_elem, int stack)
-{
-	t_list *first_temp;
-
-	first_temp = (*first_elem)->next;
-	first_temp->prev = NULL;
-	ft_lstadd_back(last_elem, *first_elem);
-	*first_elem = first_temp;
-	/*if (stack == STACK_A)
-		write(1, "rra\n", 4);
-	else 
-		write(1, "rrb\n", 4);*/
-}
-
 void stack_reverse_rotate(t_stack *stack)
 {
 	t_list *first_temp;
@@ -64,5 +52,15 @@ void stack_reverse_rotate(t_stack *stack)
 		write(1, "rrb\n", 4);*/
 }
 
-
-
+// Ainda dá erros de segfault ao fazer push de string completa - CORRIGIR
+void stack_push(t_stack *stack_1, t_stack *stack_2)
+{
+	t_list *last_temp;
+	
+	last_temp = stack_1->last_elem->prev;
+	last_temp->next = NULL;
+	stack_1->last_elem->next = NULL;
+	stack_1->last_elem->prev = NULL;
+	ft_lstadd_back(&(stack_2->last_elem), stack_1->last_elem);
+	stack_1->last_elem = last_temp;
+}

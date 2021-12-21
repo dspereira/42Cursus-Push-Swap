@@ -34,3 +34,4 @@ void create_list(t_stack *stack, int *content, int size);
 void stack_swap(t_stack *stack);
 void stack_rotate(t_stack *stack);
 void stack_reverse_rotate(t_stack *stack);
+void stack_push(t_stack *stack_1, t_stack *stack_2);

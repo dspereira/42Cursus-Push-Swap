@@ -1,5 +1,7 @@
 #include "push_swap.h"
 
+//gcc push_swap.c list.c stack_mov.c
+
 // Função de teste
 void print_stack(t_stack stack)
 {
@@ -42,6 +44,26 @@ int main(void)
 	printf("\n Stack reverse rotate\n");
 	stack_reverse_rotate(&stack_a);
 	print_stack(stack_a);
+	printf("\n Stack push a to b\n");
+	stack_push(&stack_a, &stack_b);
+	printf("\n Stack A\n");
+	print_stack(stack_a);
+	printf("\n Stack B\n");
+	print_stack(stack_b);
+
+	printf("\n Stack push a to b\n");
+	stack_push(&stack_a, &stack_b);
+	printf("\n Stack A\n");
+	print_stack(stack_a);
+	printf("\n Stack B\n");
+	print_stack(stack_b);
+
+	printf("\n Stack push b to a\n");
+	stack_push(&stack_b, &stack_a);
+	printf("\n Stack A\n");
+	print_stack(stack_a);
+	printf("\n Stack B\n");
+	print_stack(stack_b);
 
 	return (0);
 }
