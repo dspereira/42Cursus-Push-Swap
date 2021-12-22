@@ -4,8 +4,8 @@
 // RETIRAR NO FINAL
 #include <stdio.h>
 
-#define STACK_A 0
-#define STACK_B 1
+#define STACK_A 'a'
+#define STACK_B 'b'
 
 typedef struct s_list
 {
@@ -17,7 +17,7 @@ typedef struct s_list
 
 typedef struct s_stack
 {
-	int id;	
+	char id;	
 	int size;
 	t_list *first_elem;
 	t_list *last_elem;
@@ -35,3 +35,6 @@ void stack_swap(t_stack *stack);
 void stack_rotate(t_stack *stack);
 void stack_reverse_rotate(t_stack *stack);
 void stack_push(t_stack *stack_1, t_stack *stack_2);
+
+//stack print
+void stack_print_mov(char *mov, char stack_id);
