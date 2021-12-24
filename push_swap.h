@@ -26,9 +26,9 @@ typedef struct s_stack
 
 // list
 t_list	*ft_lstnew(int content);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void create_list(t_stack *stack, int *content, int size);
+void	ft_lstadd_front(t_stack *stack, t_list *new);
+void	ft_lstadd_back(t_stack *stack, t_list *new);
+void create_list(t_stack *stack, int *content, int size, int *max, int *min);
 
 // stack movements
 void stack_swap(t_stack *stack);
@@ -36,5 +36,8 @@ void stack_rotate(t_stack *stack);
 void stack_reverse_rotate(t_stack *stack);
 void stack_push(t_stack *stack_1, t_stack *stack_2);
 
-//stack print
+// stack print
 void stack_print_mov(char *mov, char stack_id);
+
+// sort algorithm
+void stack_sort(t_stack *stack_a, t_stack *stack_b);
