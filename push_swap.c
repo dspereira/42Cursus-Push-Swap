@@ -31,25 +31,30 @@ int main(int argc, char **argv)
 	stack_b.first_elem = 0;
 	stack_b.last_elem = 0;
 
-	int arr[10];
+	int arr[50];
 	arr[0] = 10;
 	arr[1] = 5;
 	arr[2] = 3;
 	arr[3] = 6;
 	arr[4] = 35;
 	arr[5] = 21;
+	arr[6] = 1;
+	arr[7] = 24;
+	arr[8] = 12;
+	arr[9] = 9;
+	arr[10] = 2;
+
+	create_list(&stack_a, arr, 11, &n_max, &n_min);
+	//print_stack(stack_a);
 
 
-	create_list(&stack_a, arr, 6, &n_max, &n_min);
-	print_stack(stack_a);
-
-/*
 	stack_sort(&stack_a, &stack_b);
 
+	/*
 	printf("print das stacks\n");
 	print_stack(stack_a);
 	printf("----\n");
 	print_stack(stack_b);
-*/
+	*/
 	return (0);
 }
