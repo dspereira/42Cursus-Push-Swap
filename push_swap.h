@@ -41,3 +41,4 @@ void stack_print_mov(char *mov, char stack_id);
 
 // sort algorithm
 void stack_sort(t_stack *stack_a, t_stack *stack_b);
+void sort_three_num(t_stack *stack, int max, int min);

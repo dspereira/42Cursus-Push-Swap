@@ -78,5 +78,5 @@ void stack_push(t_stack *stack_1, t_stack *stack_2)
 	}
 	else
 		stack_clean(stack_1);
-	stack_print_mov("p", stack_1->id);
+	stack_print_mov("p", stack_2->id);
 }
