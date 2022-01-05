@@ -7,6 +7,10 @@
 #define STACK_A 'a'
 #define STACK_B 'b'
 
+#define FROM_TOP 1
+#define FROM_BOT 0
+
+
 typedef struct s_list
 {
 	int             content;
@@ -22,6 +26,12 @@ typedef struct s_stack
 	t_list *first_elem;
 	t_list *last_elem;
 }	t_stack;
+
+typedef struct s_chunk
+{
+	int max;
+	int min;
+}	t_chunk;
 
 
 // list
@@ -40,5 +50,5 @@ void stack_push(t_stack *stack_1, t_stack *stack_2);
 void stack_print_mov(char *mov, char stack_id);
 
 // sort algorithm
-void stack_sort(t_stack *stack_a, t_stack *stack_b);
+void stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk);
 void sort_three_num(t_stack *stack, int max, int min);

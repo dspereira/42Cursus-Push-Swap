@@ -31,6 +31,7 @@ int	ft_atoi(const char *str)
 	return ((int)(num * mult));
 }
 
+// Vai buscar os dados dos argumentos de entrada
 int get_data(char *src, int *dst)
 {
 	int i;
@@ -71,14 +72,60 @@ void print_stack(t_stack stack)
 	}
 }
 
+void get_chunks(t_chunk *chunk, int *num_list, int size)
+{
+	int i;	
+	int j;
+	int k;
+	int a;
+
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size - 1)
+		{
+			if (num_list[j] > num_list[j + 1])
+			{
+				a = num_list[j];
+				num_list[j] = num_list[j + 1];
+				num_list[j + 1] = a;
+			}
+			j++;
+		}
+		i++;
+	}
+
+	chunk[0].max = num_list[size/2 - 1];
+	chunk[0].min = num_list[0];
+
+	chunk[1].max = num_list[size - 1];
+	chunk[1].min = num_list[size/2];
+
+/*
+	//TESTE APENAS
+	k = 0;
+	while (k < size)
+	{
+		printf("%i ", num_list[k]);
+		k++;
+	}
+	printf("\n\nchunk0 - min: %i  max: %i", chunk[0].min, chunk[0].max);
+	printf("\nchunk1 - min: %i  max: %i", chunk[1].min, chunk[1].max);
+*/	
+	//printf("\n\nchunk0 - min: %i  max: %i", chunk[0].min, chunk[0].max);
+	//printf("\nchunk1 - min: %i  max: %i", chunk[1].min, chunk[1].max);
+}
+
 int main(int argc, char **argv)
 {
 	t_stack stack_a;
 	t_stack stack_b;
 	int n_max;
 	int n_min;
-	int arr[1000];
+	int num_list[1000];
 	int size;
+	t_chunk chunk[50];
 
 	n_max = 0;
 	n_min = 0;
@@ -92,11 +139,11 @@ int main(int argc, char **argv)
 	stack_b.first_elem = 0;
 	stack_b.last_elem = 0;
 
-	size = get_data(argv[1], arr);
-
-	create_list(&stack_a, arr, size, &n_max, &n_min); 
-	stack_sort(&stack_a, &stack_b);
-
-
+	size = get_data(argv[1], num_list);
+	create_list(&stack_a, num_list, size, &n_max, &n_min);
+	// Obter os chunks, como a stack já foi criada o array pode ser alterado
+	get_chunks(chunk, num_list, size);
+	stack_sort(&stack_a, &stack_b, chunk);
+	//print_stack(stack_a);
 	return (0);
 }
