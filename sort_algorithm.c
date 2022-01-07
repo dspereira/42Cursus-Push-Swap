@@ -163,10 +163,25 @@ void move_chunck(t_stack *stack_a, t_stack *stack_b, t_chunk chunk)
 
 void stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk)
 {
-	move_chunck(stack_a, stack_b, chunk[1]);
-	move_chunck1(stack_a, stack_b);
-	move_chunck(stack_a, stack_b, chunk[0]);
-	move_chunck1(stack_a, stack_b);
-
+	/*
+	move_chunck(stack_a, stack_b, chunk[3]);
 	//print_stacks(*stack_a, *stack_b);
+	move_chunck1(stack_a, stack_b);
+	//print_stacks(*stack_a, *stack_b);
+	*/
+
+	move_chunck(stack_a, stack_b, chunk[2]);
+	//print_stacks(*stack_a, *stack_b);
+	move_chunck1(stack_a, stack_b);
+	//print_stacks(*stack_a, *stack_b);
+
+	move_chunck(stack_a, stack_b, chunk[1]);
+	//print_stacks(*stack_a, *stack_b);
+	move_chunck1(stack_a, stack_b);
+	//print_stacks(*stack_a, *stack_b);
+
+	move_chunck(stack_a, stack_b, chunk[0]);
+	//print_stacks(*stack_a, *stack_b);
+	move_chunck1(stack_a, stack_b);
+	//print_stacks(*stack_a, *stack_b);	
 }
