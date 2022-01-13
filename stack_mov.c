@@ -19,7 +19,7 @@ void stack_swap(t_stack *stack)
 {
 	if (!(stack->last_elem) || !(stack->last_elem->prev))
 	{
-		printf("\nSTACK SWAP: STACK %c COM MENOS DE 2 ELEMENTOS\n", stack->id);
+		//printf("\nSTACK SWAP: STACK %c COM MENOS DE 2 ELEMENTOS\n", stack->id);
 		return ;
 	}
 	swap_content(stack->last_elem, stack->last_elem->prev);
@@ -32,7 +32,7 @@ void stack_rotate(t_stack *stack)
 
 	if (!(stack->last_elem) || !(stack->last_elem->prev))
 	{
-		printf("\nSTACK ROTATE: STACK %c COM MENOS DE 2 ELEMENTOS\n", stack->id);
+		//printf("\nSTACK ROTATE: STACK %c COM MENOS DE 2 ELEMENTOS\n", stack->id);
 		return ;
 	}
 	last_temp = stack->last_elem->prev;
@@ -48,7 +48,7 @@ void stack_reverse_rotate(t_stack *stack)
 
 	if (!(stack->last_elem) || !(stack->last_elem->prev))
 	{
-		printf("\nSTACK RESVERSE ROTATE: STACK %c COM MENOS DE 2 ELEMENTOS\n", stack->id);
+		//printf("\nSTACK RESVERSE ROTATE: STACK %c COM MENOS DE 2 ELEMENTOS\n", stack->id);
 		return ;
 	}
 	first_temp = stack->first_elem->next;
@@ -64,7 +64,7 @@ void stack_push(t_stack *stack_1, t_stack *stack_2)
 	
 	if (!(stack_1->last_elem))
 	{
-		printf("\nSTACK PUSH: STACK %c VAZIA", stack_1->id);
+		//printf("\nSTACK PUSH: STACK %c VAZIA", stack_1->id);
 		return ;
 	}
 	last_temp = stack_1->last_elem->prev;
