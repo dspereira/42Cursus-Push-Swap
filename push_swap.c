@@ -98,112 +98,9 @@ void get_chunks(t_chunk *chunk, int *num_list, int size)
 	}
 
 	int teste = 0;
-	//div = (size - 4) / 4;
-	//div = (size - 9) / 4;
-
-	div = size / 5;
-
-	//printf("\n Valor DIV: %i", div);
-
-	/*
-	chunk[0].max = num_list[div - 1];
-	chunk[0].min = num_list[0];
-
-	chunk[1].max = num_list[size - 1];
-	chunk[1].min = num_list[1 * div];
-	*/
+	div = size / 12;
 
 
-/*
-	printf("\nLISTA VALORES\n");
-	while (teste < size)
-	{
-		printf("%i ", num_list[teste]);
-		teste++;
-	}
-	printf("\n***************");
-
-	printf("\n Valor DIV: %i", div);
-*/
-
-	//printf("\n Valor DIV: %i", div);	
-	
-	
-	
-
-	//COM 3 CHUNKS
-	/*
-	chunk[0].max = num_list[div - 1];
-	chunk[0].min = num_list[0];
-
-	chunk[1].max = num_list[2 * div - 1];
-	chunk[1].min = num_list[div];
-
-	chunk[2].max = num_list[size - 1];
-	chunk[2].min = num_list[2 * div];
-	*/	
-
-
-	//printf("\n\nchunk0 - min: %i  max: %i", chunk[0].min, chunk[0].max);
-	//printf("\nchunk1 - min: %i  max: %i", chunk[1].min, chunk[1].max);
-	//printf("\nchunk2 - min: %i  max: %i\n", chunk[2].min, chunk[2].max);
-
-	
-	//COM 4 CHUNKS
-	
-	/*
-	chunk[0].max = num_list[div - 1];
-	chunk[0].min = num_list[0];
-
-	chunk[1].max = num_list[2 * div - 1];
-	chunk[1].min = num_list[div];
-
-	chunk[2].max = num_list[3 * div - 1];
-	chunk[2].min = num_list[2 * div];
-
-	chunk[3].max = num_list[size - 1];
-	chunk[3].min = num_list[3 * div];
-	*/
-	
-	
-	chunk[0].max = num_list[div - 1];
-	chunk[0].min = num_list[0];
-
-	chunk[1].max = num_list[2 * div - 1];
-	chunk[1].min = num_list[div];
-
-	chunk[2].max = num_list[3 * div - 1];
-	chunk[2].min = num_list[2 * div];
-
-	chunk[3].max = num_list[4 * div - 1];
-	chunk[3].min = num_list[3 * div];
-
-	chunk[4].max = num_list[size - 1];
-	chunk[4].min = num_list[4 * div];
-	
-
-	//chunk[5].max = num_list[size - 1];
-	//chunk[5].min = num_list[5 * div];
-
-	
-	/*
-	printf("\n\nchunk0 - min: %i  max: %i", 0, div - 1);
-	printf("\nchunk1 - min: %i  max: %i", div, 2*div-1);
-	printf("\nchunk2 - min: %i  max: %i\n", 2*div, 3*div-1);
-	printf("\nchunk3 - min: %i  max: %i\n", 3*div, 4*div-1);
-	printf("\nchunk4 - min: %i  max: %i\n", 4*div, 5*div-1);
-	//printf("\n\nchunk5 - min: %i  max: %i", chunk[5].min, chunk[5].max);
-	printf("\nchunk5 - min: %i  max: %i\n", 5*div, size-1);
-	*/
-
-	/*printf("\n\nchunk0 - min: %i  max: %i", 0, div - 1);
-	printf("\nchunk1 - min: %i  max: %i", div, 2*div-1);
-	printf("\nchunk2 - min: %i  max: %i\n", 2*div, 3*div-1);
-	printf("\nchunk3 - min: %i  max: %i\n", 3*div, 4*div-1);
-	printf("\nchunk4 - min: %i  max: %i\n", 4*div, 5*div-1);
-	printf("\nchunk5 - min: %i  max: %i\n", 5*div, size-1);*/
-
-	/*
 	chunk[0].max = num_list[div - 1];
 	chunk[0].min = num_list[0];
 
@@ -227,16 +124,19 @@ void get_chunks(t_chunk *chunk, int *num_list, int size)
 
 	chunk[7].max = num_list[8 * div - 1];
 	chunk[7].min = num_list[7 * div];
-
+	
 	chunk[8].max = num_list[9 * div - 1];
 	chunk[8].min = num_list[8 * div];
 
 	chunk[9].max = num_list[10 * div - 1];
 	chunk[9].min = num_list[9 * div];
 
-	chunk[10].max = num_list[size - 1];
+	chunk[10].max = num_list[11 * div - 1];
 	chunk[10].min = num_list[10 * div];
-	*/
+
+	chunk[11].max = num_list[size - 1];
+	chunk[11].min = num_list[11 * div];
+
 }
 
 int main(int argc, char **argv)

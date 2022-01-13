@@ -723,38 +723,78 @@ void move_chunck_a_to_b(t_stack *stack_a, t_stack *stack_b, t_chunk chunk)
 	}		
 }
 
+void move_chunck_b_to_a1(t_stack *stack_a, t_stack *stack_b, t_chunk chunk)
+{
+	int position;
+
+	position = 1;
+	while (position >= 0)
+	{
+		position = search_element_from_top(*stack_b, chunk);
+		if(position >= 0)
+			move_element(stack_b, stack_a, position, FROM_TOP);
+	}		
+}
+
+void move_chunck_a_to_b2(t_stack *stack_a, t_stack *stack_b, t_chunk chunk_1, t_chunk chunk_2)
+{
+	int top;
+	int bot;
+
+	top = 1;
+	bot = 1;
+	while (top < 1000 || bot < 1000)
+	{
+		top = search_element_from_top(*stack_a, chunk_2);
+		bot = search_element_from_top(*stack_a, chunk_1);
+
+		//printf("\nvalor top: %i, bot: %i", top, bot);
+
+		if (top < 0)
+			top = 1000;
+		if (bot < 0)
+			bot = 1000;
+
+		if(top < bot)
+		{
+			move_element(stack_a, stack_b, top, FROM_TOP);
+			//printf("\nENTROU NO TOP");
+		}
+		else if (bot < top)
+		{
+			move_element(stack_a, stack_b, bot, FROM_TOP);
+			stack_rotate(stack_b);
+			//printf("\nENTROU NO BOT");
+		}		
+	}		
+}
+
 void stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk)
 {
-	move_chunck_a_to_b(stack_a, stack_b, chunk[0]);
-	move_chunck_a_to_b(stack_a, stack_b, chunk[1]);
+
+	/*
+	//para 100
+	move_chunck_a_to_b2(stack_a, stack_b, chunk[0], chunk[1]);
 	move_chunck_a_to_b(stack_a, stack_b, chunk[2]);
 	move_chunck_a_to_b(stack_a, stack_b, chunk[3]);
 	move_chunck_a_to_b(stack_a, stack_b, chunk[4]);
+	*/
 
-	/*
-	move_chunck_a_to_b(stack_a, stack_b, chunk[5]);
-	move_chunck_a_to_b(stack_a, stack_b, chunk[6]);
-	move_chunck_a_to_b(stack_a, stack_b, chunk[7]);
+	//para 500
+	
+	move_chunck_a_to_b2(stack_a, stack_b, chunk[3], chunk[4]);
+	move_chunck_a_to_b2(stack_a, stack_b, chunk[2], chunk[5]);
+	move_chunck_a_to_b2(stack_a, stack_b, chunk[1], chunk[6]);
+	move_chunck_a_to_b2(stack_a, stack_b, chunk[0], chunk[7]);
+
 	move_chunck_a_to_b(stack_a, stack_b, chunk[8]);
 	move_chunck_a_to_b(stack_a, stack_b, chunk[9]);
 	move_chunck_a_to_b(stack_a, stack_b, chunk[10]);
-	*/
-	//move_chunck_a_to_b(stack_a, stack_b, chunk[5]);
+	move_chunck_a_to_b(stack_a, stack_b, chunk[11]);
 
-	//print_stacks(*stack_a, *stack_b);
+	move_chunck_b_to_a_1(stack_a, stack_b, chunk[11]);
+	rotate_stack1(stack_a, chunk[11]);
 
-	//first_move_b_to_a(stack_a, stack_b, chunk[2]);
-	//first_move_b_to_a(stack_a, stack_b, chunk[1]);
-	//first_move_b_to_a(stack_a, stack_b, chunk[0]);
-
-	/*move_chunck_b_to_a_1(stack_a, stack_b, chunk[2]);
-	rotate_stack1(stack_a, chunk[2]);
-	print_stacks(*stack_a, *stack_b);*/
-	
-	//move_chunck_b_to_a_1(stack_a, stack_b, chunk[5]);
-	//rotate_stack1(stack_a, chunk[5]);
-
-	/*
 	move_chunck_b_to_a_1(stack_a, stack_b, chunk[10]);
 	rotate_stack1(stack_a, chunk[10]);
 
@@ -772,9 +812,6 @@ void stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk)
 
 	move_chunck_b_to_a_1(stack_a, stack_b, chunk[5]);
 	rotate_stack1(stack_a, chunk[5]);
-	*/
-
-	//print_stacks(*stack_a, *stack_b);
 
 	move_chunck_b_to_a_1(stack_a, stack_b, chunk[4]);
 	rotate_stack1(stack_a, chunk[4]);
@@ -793,5 +830,6 @@ void stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk)
 	move_chunck1(stack_a, stack_b);
 	rotate_stack1(stack_a, chunk[0]);
 	//print_stacks(*stack_a, *stack_b);
+	
 	
 }
