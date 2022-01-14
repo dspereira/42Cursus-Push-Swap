@@ -276,44 +276,99 @@ void reverse_rotate_stack(t_stack *stack_1, t_chunk chunk)
 	//printf("NUMBER OF ROTATES: %i", i);
 }
 
+
+t_list *get_element(t_stack stack, int pos)
+{
+	if (pos == TOP)
+		return (stack.last_elem);
+	else
+		return (stack.first_elem);
+}
+
+t_list *get_next_element(t_list *elem, int dir)
+{
+	if (dir == DOWN)
+		return (elem->prev);
+	else
+		return (elem->next);
+}
+
+/*
+	return: 1 -> The content belongs to chunk 
+			0 -> The content not belongs to chunk
+*/
+int is_part_of_chunk(int cont, t_chunk chunk)
+{
+	if (cont >= chunk.min && cont <= chunk.max)
+		return (1);
+	else 
+		return (0);
+}
+
+/*
+	return: Returns the position of the element on the stack counting from the top.
+
+	int *ch: 1 -> content belong to chunk_1 
+			 2 -> content belong to chunk_2
+*/
+int search_content_in_the_chunks(t_stack stack, t_chunk *chunk_1, t_chunk *chunk_2, int *ch)
+{
+	int i;
+	int content;
+	t_list *elem;
+
+	elem = get_element(stack, TOP);
+	i = 0;	
+	while (elem != NULL)
+	{
+		content = get_elem_cont(elem);
+		if (chunk_1 && is_part_of_chunk(content, *chunk_1))
+		{
+			if (ch)
+				*ch = 1;
+			return (i);
+		}
+		else if (chunk_2 && is_part_of_chunk(content, *chunk_2))
+		{
+			if (ch)
+				*ch = 2;
+			return (i);
+		}
+		elem = get_next_element(elem, DOWN);
+		i++;
+	}
+	return (-1);
+}
+
 void move_chunk_unsorted_order(t_stack *stack_1, t_stack *stack_2, t_chunk chunk)
 {
 	int pos;
+	int ch = 0;
 
 	pos = 1;
 	while (pos >= 0)
 	{
-		pos = search_element_from_top(*stack_1, chunk);
+		pos = search_content_in_the_chunks(*stack_1, &chunk, 0, 0);
 		if(pos >= 0)
 			move_element(stack_1, stack_2, pos, FROM_TOP);
 	}
 }
 
-/*
-IDEIA:
-	Criar uma função de pesquisa que indica a posição do numero e o chunk a que o mesmo pertece
-	Assim deixaria de ser necessário 2 pesquisas e comparar 
-*/
 void move_chunks_unsorted_order(t_stack *stack_1, t_stack *stack_2, t_chunk chunk_1, t_chunk chunk_2)
 {
-	int ch_top;
-	int ch_bot;
+	int ch;
+	int pos;
 
-	ch_top = 1;
-	ch_bot = 1;
-	while (ch_top >= 0 || ch_bot >=0)
+	pos = 1;
+	ch = 0;
+	while (pos >= 0)
 	{
-		ch_top = search_element_from_top(*stack_1, chunk_2);
-		ch_bot = search_element_from_top(*stack_1, chunk_1);
-		if (ch_bot < 0 || (ch_top < ch_bot && ch_top >= 0 && ch_bot >= 0))
-		{
-			move_element(stack_1, stack_2, ch_top, FROM_TOP);
-		}
-		else if (ch_top < 0 || (ch_bot < ch_top && ch_top >= 0 && ch_bot >= 0))
-		{
-			move_element(stack_1, stack_2, ch_bot, FROM_TOP);
+		pos = search_content_in_the_chunks(*stack_1, &chunk_1, &chunk_2, &ch);
+		
+		if (pos >= 0)
+			move_element(stack_1, stack_2, pos, FROM_TOP);
+		if (pos >= 0 && ch == 2)
 			stack_rotate(stack_2);
-		}
 	}	
 }
 

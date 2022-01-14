@@ -10,6 +10,12 @@
 #define FROM_TOP 1
 #define FROM_BOT 0
 
+#define TOP 1
+#define BOT 0
+
+#define UP 1
+#define DOWN 0
+
 
 typedef struct s_list
 {
