@@ -98,7 +98,7 @@ void get_chunks(t_chunk *chunk, int *num_list, int size)
 	}
 
 	int teste = 0;
-	div = size / 12;
+	div = size / 13;
 
 
 	chunk[0].max = num_list[div - 1];
@@ -134,8 +134,11 @@ void get_chunks(t_chunk *chunk, int *num_list, int size)
 	chunk[10].max = num_list[11 * div - 1];
 	chunk[10].min = num_list[10 * div];
 
-	chunk[11].max = num_list[size - 1];
+	chunk[11].max = num_list[12 * div - 1];
 	chunk[11].min = num_list[11 * div];
+
+	chunk[12].max = num_list[size - 1];
+	chunk[12].min = num_list[12 * div];
 
 }
 

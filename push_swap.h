@@ -16,6 +16,10 @@
 #define UP 1
 #define DOWN 0
 
+#define BIGGER 1
+#define SMALLER 0
+
+
 
 typedef struct s_list
 {
@@ -38,6 +42,13 @@ typedef struct s_chunk
 	int max;
 	int min;
 }	t_chunk;
+
+typedef struct s_elem
+{
+	int cont;
+	int pos;
+	int id;
+}	t_elem;
 
 
 // list
