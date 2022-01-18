@@ -123,6 +123,20 @@ int get_chunks(t_chunk *chunk, int *num_list, int size)
 	return (num_chunks);
 }
 
+int is_sorted(int *arr, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		if (arr[i] > arr[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int main(int argc, char **argv)
 {
 	t_stack stack_a;
@@ -149,13 +163,23 @@ int main(int argc, char **argv)
 	size = get_data(argv[1], num_list);
 
 	//printf("\nSIZE OF LIST: %i", size);
-	create_list(&stack_a, num_list, size, &n_max, &n_min);
-	// Obter os chunks, como a stack já foi criada o array pode ser alterado
-	//num_chunks = get_chunks(chunk, num_list, size);
-	//stack_sort(&stack_a, &stack_b, chunk, num_chunks);
-	//print_stack(stack_a);
-	//sort_three_num(&stack_a);
-	//sort_five_num(&stack_a, &stack_b);
-	sort_two_num(&stack_a);
+
+	if (!is_sorted(num_list, size))
+	{
+		create_list(&stack_a, num_list, size, &n_max, &n_min);
+
+		if (size == 2)
+			sort_two_num(&stack_a);
+		else if (size == 3)
+			sort_three_num(&stack_a);
+		else if (size > 3 && size <= 5)
+			sort_five_num(&stack_a, &stack_b);
+		else if (size > 5)
+		{
+			num_chunks = get_chunks(chunk, num_list, size);
+			stack_sort(&stack_a, &stack_b, chunk, num_chunks);
+		}
+	}
+
 	return (0);
 }

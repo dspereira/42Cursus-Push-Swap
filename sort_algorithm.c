@@ -425,8 +425,6 @@ void sort_five_num(t_stack *stack_1, t_stack *stack_2)
 }
 
 
-
-
 void sort_two_num(t_stack *stack)
 {
 	t_list	*top;
