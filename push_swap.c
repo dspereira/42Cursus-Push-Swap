@@ -2,8 +2,9 @@
 
 //gcc push_swap.c list.c stack_mov.c stack_mov_print.c sort_algorithm.c
 
-// ./a.out ARG | wc -l
+// ./a.out $ARG | wc -l
 // ./a.out $ARG | ./checker_linux $ARG
+// export ARG=$(./get_num 100)
 
 
 int	ft_atoi(const char *str)
@@ -72,13 +73,11 @@ void print_stack(t_stack stack)
 	}
 }
 
-void get_chunks(t_chunk *chunk, int *num_list, int size)
+void sort_array(int *arr, int size)
 {
 	int i;	
 	int j;
-	int k;
-	int a;
-	int div;
+	int buff;
 
 	i = 0;
 	while (i < size)
@@ -86,60 +85,42 @@ void get_chunks(t_chunk *chunk, int *num_list, int size)
 		j = 0;
 		while (j < size - 1)
 		{
-			if (num_list[j] > num_list[j + 1])
+			if (arr[j] > arr[j + 1])
 			{
-				a = num_list[j];
-				num_list[j] = num_list[j + 1];
-				num_list[j + 1] = a;
+				buff = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = buff;
 			}
 			j++;
 		}
 		i++;
+	}	
+}
+
+int get_chunks(t_chunk *chunk, int *num_list, int size)
+{
+	int div;
+	int count;
+	int num_chunks;
+
+	sort_array(num_list, size);
+	if (size > 5 && size < 50)
+		num_chunks = 2; 
+	else if (size >= 50 && size < 250)
+		num_chunks = 5; 
+	else if (size >= 250)
+		num_chunks = 13; 	
+	div = size / num_chunks;
+	count = 0;
+	while (count < num_chunks)
+	{
+		chunk[count].max = num_list[(count + 1) * div - 1];
+		chunk[count].min = num_list[count * div];
+		if (count == num_chunks - 1)
+			chunk[count].max = num_list[size - 1];
+		count++;
 	}
-
-	int teste = 0;
-	div = size / 13;
-
-
-	chunk[0].max = num_list[div - 1];
-	chunk[0].min = num_list[0];
-
-	chunk[1].max = num_list[2 * div - 1];
-	chunk[1].min = num_list[div];
-
-	chunk[2].max = num_list[3 * div - 1];
-	chunk[2].min = num_list[2 * div];
-
-	chunk[3].max = num_list[4 * div - 1];
-	chunk[3].min = num_list[3 * div];
-
-	chunk[4].max = num_list[5 * div - 1];
-	chunk[4].min = num_list[4 * div];
-
-	chunk[5].max = num_list[6 * div - 1];
-	chunk[5].min = num_list[5 * div];
-
-	chunk[6].max = num_list[7 * div - 1];
-	chunk[6].min = num_list[6 * div];
-
-	chunk[7].max = num_list[8 * div - 1];
-	chunk[7].min = num_list[7 * div];
-	
-	chunk[8].max = num_list[9 * div - 1];
-	chunk[8].min = num_list[8 * div];
-
-	chunk[9].max = num_list[10 * div - 1];
-	chunk[9].min = num_list[9 * div];
-
-	chunk[10].max = num_list[11 * div - 1];
-	chunk[10].min = num_list[10 * div];
-
-	chunk[11].max = num_list[12 * div - 1];
-	chunk[11].min = num_list[11 * div];
-
-	chunk[12].max = num_list[size - 1];
-	chunk[12].min = num_list[12 * div];
-
+	return (num_chunks);
 }
 
 int main(int argc, char **argv)
@@ -151,6 +132,7 @@ int main(int argc, char **argv)
 	int num_list[1000];
 	int size;
 	t_chunk chunk[50];
+	int num_chunks;
 
 	n_max = 0;
 	n_min = 0;
@@ -169,12 +151,9 @@ int main(int argc, char **argv)
 	//printf("\nSIZE OF LIST: %i", size);
 	create_list(&stack_a, num_list, size, &n_max, &n_min);
 	// Obter os chunks, como a stack já foi criada o array pode ser alterado
-	get_chunks(chunk, num_list, size);
-	stack_sort(&stack_a, &stack_b, chunk);
+	//num_chunks = get_chunks(chunk, num_list, size);
+	//stack_sort(&stack_a, &stack_b, chunk, num_chunks);
 	//print_stack(stack_a);
+	sort_three_num(&stack_a);
 	return (0);
 }
-
-/*
-394 681 134 44 342 309 952 650 165 177
-*/

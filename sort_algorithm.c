@@ -221,30 +221,108 @@ void move_chunck_sorted_order(t_stack *stack_1, t_stack *stack_2, t_chunk chunk)
 	}
 }
 
-void	stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk)
+void	stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk, int	num_chunks)
 {
-	int	chunks_size = 13;
 	int	aux;
 	int	i1;
 	int	i2;
 
-	aux = (int)(chunks_size * 0.75);
+	aux = (int)(num_chunks * 0.75);
 	if (aux % 2 == 0)
 		aux--;
 	aux = (int)(aux / 2);
 	i1 = aux;
 	i2 = aux+1;
-	while(i2 < chunks_size)
+	while(i2 < num_chunks)
 	{
 		if (i1 >= 0)
 			move_chunks_unsorted_order(stack_a, stack_b, &chunk[i1--], &chunk[i2++]);
 		else 
 			move_chunks_unsorted_order(stack_a, stack_b, &chunk[i2++], 0);
 	}
-	i1 = chunks_size - 1;
+	i1 = num_chunks - 1;
 	while (i1 >= 0)
 	{
 		move_chunck_sorted_order(stack_a, stack_b, chunk[i1]);
 		reverse_rotate_stack(stack_a, chunk[i1--]);
+	}
+}
+
+
+
+
+//#############################################
+
+/*
+	return: 1 -> e1 > e2
+			2 -> e2 > e1 
+*/
+int compare_cont(t_list *e1, t_list *e2)
+{
+	int n1;
+	int n2;
+	
+	n1 = e1->content;
+	n2 = e2->content;
+	if (n1 > n2)
+		return (1);
+	else
+		return (0);
+}
+
+int is_bigger(t_stack stack, t_list *el)
+{
+	t_list	*elem;
+	int cont;
+
+	elem = get_element(stack, TOP);
+	cont = get_elem_cont(elem);
+	while (elem != NULL)
+	{
+		if (get_elem_cont(elem) > get_elem_cont(el))
+			return (0);
+		elem = get_next_elem(elem, DOWN);
+	}
+	return (1);
+}
+
+int is_smaller(t_stack stack, t_list *el)
+{
+	t_list	*elem;
+	int cont;
+
+	elem = get_element(stack, TOP);
+	cont = get_elem_cont(elem);
+	while (elem != NULL)
+	{
+		if (get_elem_cont(elem) < get_elem_cont(el))
+			return (0);
+		elem = get_next_elem(elem, DOWN);
+	}
+	return (1);
+}
+
+void sort_three_num(t_stack *stack)
+{
+	t_list *top;
+	t_list *bot;
+	t_list *mid;
+	int i;
+
+	i = 0;
+	while(i <= 1)
+	{
+		top = get_element(*stack, TOP);
+		mid = get_next_elem(top, DOWN);
+		bot = get_element(*stack, BOT);
+		if(compare_cont(top, mid) && !is_bigger(*stack, top))
+			stack_swap(stack);
+		else if (is_bigger(*stack, top))
+			stack_rotate(stack);
+		else if (is_smaller(*stack, bot))
+			stack_reverse_rotate(stack);
+		else if (is_bigger(*stack, mid))
+			stack_swap(stack);		
+		i++;
 	}
 }
