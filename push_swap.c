@@ -154,6 +154,8 @@ int main(int argc, char **argv)
 	//num_chunks = get_chunks(chunk, num_list, size);
 	//stack_sort(&stack_a, &stack_b, chunk, num_chunks);
 	//print_stack(stack_a);
-	sort_three_num(&stack_a);
+	//sort_three_num(&stack_a);
+	//sort_five_num(&stack_a, &stack_b);
+	sort_two_num(&stack_a);
 	return (0);
 }

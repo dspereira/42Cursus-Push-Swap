@@ -69,3 +69,5 @@ void stack_print_mov(char *mov, char stack_id);
 // sort algorithm
 void	stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk, int	num_chunks);
 void sort_three_num(t_stack *stack);
+void sort_five_num(t_stack *stack_1, t_stack *stack_2);
+void sort_two_num(t_stack *stack);
