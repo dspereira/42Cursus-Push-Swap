@@ -100,8 +100,9 @@ char	**ft_split(char const *s, char c)
 	return (arr);
 }
 
+//##############################################
 
-long int	atoi_long(const char *str)
+long int	atoi_long(char *str)
 {
 	int			i;
 	long int	num;
@@ -126,26 +127,35 @@ long int	atoi_long(const char *str)
 	return ((num * mult));
 }
 
+void free_matrix(char **m, int size)
+{
+    int i;
+    
+    i = 0;
+    while (i < size)
+    {
+        free(m[i]);
+        i++;
+    }
+    free(m);
+}
 
 /*
-    return: 1 -> conversion sucess
-            0 -> conversion error
-*/
-int	convert_number(const char *str, int *nb)
+ *    return: 1 -> conversion sucess
+ *            0 -> conversion error
+ */
+int	convert_number(char *src, int *dst)
 {
     long int num;
 
-    if(ft_strlen(str) > 11)
+    if(ft_strlen(src) > 11)
         return (0);
-    num = atoi_long(str);
+    num = atoi_long(src);
     if (num < MIN_INT || num > MAX_INT)
         return (0);
-    *nb = (int)num; 
+    *dst = (int)num; 
     return (1);
 }
-
-
-//##############################################
 
 int is_numeric(char *arr)
 {
@@ -177,13 +187,11 @@ int get_size_matrix(char **m)
         return (0);
     i = 0;
     while (m[i])
-    {
         i++;
-    }
     return (i);
 }
 
-int *get_args_arr(char **m, int size)
+int *get_int_arr(char **m, int size)
 {
     int *arr;
     int i;
@@ -204,59 +212,44 @@ int *get_args_arr(char **m, int size)
     return (arr);
 }
 
-void free_matrix(char **m)
+/*
+ *   return size of dst array
+ */
+int parse_strings_to_array(char **src, int size, int **dst)
 {
-    int i;
-    
-    i = 0;
-    while (m[i] != 0)
+    char **m;
+    int done_split;
+
+    done_split = 0;
+    if (size == 1)
     {
-        free(m[i]);
-        i++;
+       m = ft_split(*src, ' ');
+       size = get_size_matrix(m);
+       done_split = 1;
     }
-    free(m);
+    else 
+        m = src;
+    *dst = get_int_arr(m, size);
+    if (done_split)
+        free_matrix(m, size);
+    if (*dst)
+        return (size);
+    return (0);
 }
 
 /*
-    return:   >0 -> Number of parameters
-               0 -> No parameters are specified
-              -1 -> Error
-*/
-int get_input_args(char **args, int argc, int **arr)
+ *   return: >0 -> Number of parameters
+ *            0 -> No parameters are specified
+ *           -1 -> Error
+ */
+int get_input_args(char **args, int argc, int **dst)
 {
-    char **m;
     int size;
-    int i;
-    int num;
 
     if (argc < 2)
         return (0);
-    if (argc == 2)
-    {
-        m = ft_split(args[1], ' ');
-        size = get_size_matrix(m);
-        *arr = get_args_arr(m, size);
-        free_matrix(m);
-        if (!(*arr))
-            return (-1);
-    }
-    else if (argc > 2)
-    {
-        i = 0;
-        *arr = malloc((argc - 1) * sizeof(int));
-        if (!(*arr))
-            return (0);
-        while (i < argc - 1)
-        {
-            if(!is_numeric(args[i+1]) || !convert_number(args[i+1], &num))
-            {
-                free(*arr);
-                return (0);
-            }
-            (*arr)[i] = num;
-            i++;
-        }
-        size = i;
-    }
-    return (size);
+    size = parse_strings_to_array((args + 1), (argc - 1), dst);
+    if (size)
+        return (size);
+    return (-1);
 }
