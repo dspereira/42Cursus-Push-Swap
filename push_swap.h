@@ -19,6 +19,9 @@
 #define BIGGER 1
 #define SMALLER 0
 
+#define MAX_INT 2147483647
+#define MIN_INT -2147483648
+
 
 
 typedef struct s_list
@@ -71,3 +74,4 @@ void	stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk, int	num_chun
 void sort_three_num(t_stack *stack);
 void sort_five_num(t_stack *stack_1, t_stack *stack_2);
 void sort_two_num(t_stack *stack);
+int get_input_args(char **args, int argc, int **arr);
