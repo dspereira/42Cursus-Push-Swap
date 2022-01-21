@@ -1,6 +1,6 @@
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
-//gcc push_swap.c list.c stack_mov.c stack_mov_print.c sort_algorithm.c
+//gcc push_swap.c list.c stack_mov.c stack_mov_print.c sort_algorithm.c get_input_args.c get_input_args_utils.c utils.c
 
 // ./a.out $ARG | wc -l
 // ./a.out $ARG | ./checker_linux $ARG
@@ -147,6 +147,7 @@ int main(int argc, char **argv)
 	int size;
 	t_chunk chunk[50];
 	int num_chunks;
+	int *args_arr;
 
 	n_max = 0;
 	n_min = 0;
@@ -160,10 +161,25 @@ int main(int argc, char **argv)
 	stack_b.first_elem = 0;
 	stack_b.last_elem = 0;
 
-	size = get_data(argv[1], num_list);
+	//size = get_data(argv[1], num_list);
+	int i = 0;
+	int a = get_input_args(argv, argc, &args_arr);
+
+	printf("\nvalor de a: %i", a);
+	if (a > 0)
+	{
+		while (i < a)
+		{
+			printf("\nvalor: %i", args_arr[i]);
+			i++;
+		}
+	}
+	else 
+		printf("\nError");
+
 
 	//printf("\nSIZE OF LIST: %i", size);
-
+	/*
 	if (!is_sorted(num_list, size))
 	{
 		create_list(&stack_a, num_list, size, &n_max, &n_min);
@@ -180,6 +196,7 @@ int main(int argc, char **argv)
 			stack_sort(&stack_a, &stack_b, chunk, num_chunks);
 		}
 	}
+	*/
 
 	return (0);
 }

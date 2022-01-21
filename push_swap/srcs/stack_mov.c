@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void swap_content(t_list *elem1, t_list *elem2)
 {

@@ -4,6 +4,9 @@
 // RETIRAR NO FINAL
 #include <stdio.h>
 
+# include <unistd.h>
+# include <stdlib.h>
+
 #define STACK_A 'a'
 #define STACK_B 'b'
 
@@ -75,3 +78,12 @@ void sort_three_num(t_stack *stack);
 void sort_five_num(t_stack *stack_1, t_stack *stack_2);
 void sort_two_num(t_stack *stack);
 int get_input_args(char **args, int argc, int **arr);
+
+
+size_t	ft_strlen(const char *s);
+char	**ft_split(char const *s, char c);
+
+
+int get_size_matrix(char **m);
+void free_matrix(char **m, int size);
+long int	atoi_long(char *str);

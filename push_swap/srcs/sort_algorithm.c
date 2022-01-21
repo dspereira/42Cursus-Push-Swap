@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 // export ARG=$(./get_num 100)  
 // ./a.out $ARG | ./checker_linux $ARG

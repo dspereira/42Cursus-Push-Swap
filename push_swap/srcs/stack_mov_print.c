@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void stack_print_mov(char *mov, char stack_id)
 {
