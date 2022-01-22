@@ -1,48 +1,27 @@
 #include "../includes/push_swap.h"
 
+
 /*
  *    return: 1 -> conversion sucess
  *            0 -> conversion error
  */
-int	convert_number(char *src, int *dst)
+int	convert_str_to_nb(char *src, int *dst)
 {
-	long int	num;
+	long int	nb;
 
-	if (ft_strlen(src) > 11)
+	if (is_longer_than_int(src))
 		return (0);
-	num = atoi_long(src);
-	if (num < MIN_INT || num > MAX_INT)
+	nb = atoi_long(src);
+	if (!is_range_int(nb))
 		return (0);
-	*dst = (int)num;
-	return (1);
-}
-
-int	is_numeric(char *arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i] != '\0')
-	{
-		if (i == 0 && (arr[i] == '-' || arr[i] == '+'))
-		{
-			i++;
-			if (ft_strlen(arr) > 1)
-				continue ;
-			else
-				return (0);
-		}
-		if ((arr[i] < '0' || arr[i] > '9'))
-			return (0);
-		i++;
-	}
+	*dst = (int)nb;
 	return (1);
 }
 
 /*
  *	return array of integers, or 0 if an error occurred
  */
-int	*get_int_arr(char **m, int size)
+int	*get_nb_array(char **m, int size)
 {
 	int	*arr;
 	int	i;
@@ -53,7 +32,7 @@ int	*get_int_arr(char **m, int size)
 	i = 0;
 	while (i < size)
 	{
-		if (!is_numeric(m[i]) || !convert_number(m[i], &arr[i]))
+		if (!is_numeric(m[i]) || !convert_str_to_nb(m[i], &arr[i]))
 		{
 			free(arr);
 			return (0);
@@ -66,7 +45,7 @@ int	*get_int_arr(char **m, int size)
 /*
  *   return size of dst array
  */
-int	parse_strings_to_array(char **src, int size, int **dst)
+int	parse_strs_to_array(char **src, int size, int **dst)
 {
 	char	**m;
 	int		done_split;
@@ -74,13 +53,13 @@ int	parse_strings_to_array(char **src, int size, int **dst)
 	done_split = 0;
 	if (size == 1)
 	{
-		m = ft_split(*src, ' ');
+		m = ft_split(src[0], ' ');
 		size = get_size_matrix(m);
 		done_split = 1;
 	}
 	else
 		m = src;
-	*dst = get_int_arr(m, size);
+	*dst = get_nb_array(m, size);
 	if (done_split)
 		free_matrix(m, size);
 	if (*dst)
@@ -99,7 +78,7 @@ int	get_input_args(char **args, int argc, int **dst)
 
 	if (argc < 2)
 		return (0);
-	size = parse_strings_to_array((args + 1), (argc - 1), dst);
+	size = parse_strs_to_array((args + 1), (argc - 1), dst);
 	if (size)
 		return (size);
 	return (-1);

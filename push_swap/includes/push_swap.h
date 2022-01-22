@@ -91,3 +91,11 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 
 int get_chunks(t_chunk *chunk, int *num_list, int size);
+
+
+/*  verifications.c  */
+int is_longer_than_int(char *str);
+int is_range_int(long int nb);
+int	is_numeric(char *str);
+int is_sorted(int *arr, int size);
+int have_repeated_numbers(const int *arr, int size);

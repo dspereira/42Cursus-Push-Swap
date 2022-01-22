@@ -1,6 +1,6 @@
 #include "../includes/push_swap.h"
 
-//gcc push_swap.c list.c stack_mov.c stack_mov_print.c sort_algorithm.c get_input_args.c get_input_args_utils.c utils.c get_chunks.c
+//gcc push_swap.c list.c stack_mov.c stack_mov_print.c sort_algorithm.c get_input_args.c get_input_args_utils.c utils.c get_chunks.c verifications.c
 
 // ./a.out $ARG | wc -l
 // ./a.out $ARG | ./checker_linux $ARG
@@ -16,9 +16,6 @@ void print_stack(t_stack stack)
 		stack.last_elem = stack.last_elem->prev;
 	}
 }
-
-
-
 
 int *array_dup(const int *src, int size)
 {
@@ -63,35 +60,6 @@ int *sort_array(const int *src, int size)
 	}
 	return (dst);	
 }
-
-int is_sorted(int *arr, int size)
-{
-	int i;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		if (arr[i] > arr[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int have_repeated_numbers(const int *arr, int size)
-{
-	int i;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		if (arr[i] == arr[i + 1])
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 
 
 
