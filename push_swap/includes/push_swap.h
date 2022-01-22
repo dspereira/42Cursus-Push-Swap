@@ -87,3 +87,7 @@ char	**ft_split(char const *s, char c);
 int get_size_matrix(char **m);
 void free_matrix(char **m, int size);
 long int	atoi_long(char *str);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+
+
+int get_chunks(t_chunk *chunk, int *num_list, int size);
