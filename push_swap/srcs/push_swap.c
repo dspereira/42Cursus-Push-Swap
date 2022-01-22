@@ -1,6 +1,6 @@
 #include "../includes/push_swap.h"
 
-//gcc push_swap.c list.c stack_mov.c stack_mov_print.c sort_algorithm.c get_input_args.c get_input_args_utils.c utils.c get_chunks.c verifications.c
+//gcc push_swap.c list.c stack_mov.c stack_mov_print.c sort_algorithm.c get_input_args.c get_input_args_utils.c utils.c get_chunks.c input_verifications.c sort_array.c
 
 // ./a.out $ARG | wc -l
 // ./a.out $ARG | ./checker_linux $ARG
@@ -17,78 +17,32 @@ void print_stack(t_stack stack)
 	}
 }
 
-int *array_dup(const int *src, int size)
+t_stack init_stack(char id)
 {
-	int *dst;
-	int i;
+	t_stack stack;
 
-	dst = malloc(size * sizeof(int));
-	if (!dst)
-		return (0);
-	i = 0;
-	while (i < size)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	return(dst);
-}
-
-int *sort_array(const int *src, int size)
-{
-	int i;	
-	int j;
-	int buff;
-	int *dst;
-
-	dst = array_dup(src, size);
-	i = 0;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size - 1)
-		{
-			if (dst[j] > dst[j + 1])
-			{
-				buff = dst[j];
-				dst[j] = dst[j + 1];
-				dst[j + 1] = buff;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (dst);	
-}
-
-
+	stack.id = id;
+	stack.size = 0;
+	stack.first_elem = 0;
+	stack.last_elem = 0;
+	return stack;
+} 
 
 int main(int argc, char **argv)
 {
 	t_stack stack_a;
 	t_stack stack_b;
 
-	int n_max;
-	int n_min;
-
 	int *num_list;
 	int size;
 	t_chunk chunk[50];
 	int num_chunks;
 
-	n_max = 0;
-	n_min = 0;
-	stack_a.id = STACK_A;
-	stack_a.size = 0;
-	stack_a.first_elem = 0;
-	stack_a.last_elem = 0;
-
-	stack_b.id = STACK_B;
-	stack_b.size = 0;
-	stack_b.first_elem = 0;
-	stack_b.last_elem = 0;
-
 	int *sorted_arr;
+
+
+	stack_a = init_stack(STACK_A);
+	stack_b = init_stack(STACK_B);
 
 	size = get_input_args(argv, argc, &num_list);
 	if (size < 0)
@@ -109,8 +63,7 @@ int main(int argc, char **argv)
 		
 	if (!is_sorted(num_list, size))
 	{
-		create_list(&stack_a, num_list, size, &n_max, &n_min);
-
+		create_list(&stack_a, num_list, size);
 		if (size == 2)
 			sort_two_num(&stack_a);
 		else if (size == 3)

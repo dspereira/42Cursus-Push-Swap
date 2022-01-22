@@ -49,20 +49,14 @@ void	ft_lstadd_back(t_stack *stack, t_list *new)
 	}
 }
 
-void create_list(t_stack *stack, int *content, int size, int *max, int *min)
+void create_list(t_stack *stack, int *cont, int size)
 {
 	int i;
 	
 	i = 0;
-	*max = content[i];
-	*min = content[i];
 	while(i < size)
 	{
-		if (content[i] > *max)
-			*max = content[i];
-		else if (content[i] < *min)
-			*min = content[i];
-		ft_lstadd_front(stack, ft_lstnew(content[i]));
+		ft_lstadd_front(stack, ft_lstnew(cont[i]));
 		i++;
 	}
 	stack->size = size;
