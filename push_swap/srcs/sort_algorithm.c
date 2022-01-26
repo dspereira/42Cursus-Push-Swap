@@ -4,6 +4,12 @@
 // ./a.out $ARG | ./checker_linux $ARG
 // ./a.out $ARG | wc -l
 
+typedef struct s_pos
+{
+	int pos;
+	int dir;
+}	t_pos;
+
 void print_stack1(t_stack stack)
 {
 	while (stack.last_elem != NULL)
@@ -45,34 +51,6 @@ t_list	*get_next_elem(t_list *elem, int dir)
 		return (elem->next);
 }
 
-void	move_element(t_stack *stack_1, t_stack *stack_2, int pos, int dir, int smal)
-{
-	int	end_pos;
-	
-	if (dir == FROM_TOP)
-		end_pos = 0;
-	else
-		end_pos = -1;
-
-	while (pos >= end_pos)
-	{
-		if (pos == end_pos)
-		{
-			stack_push(stack_1, stack_2);
-			if (smal)
-				stack_rotate(stack_2);
-		}
-		else
-		{
-			if (dir == FROM_TOP)
-				stack_rotate(stack_1);
-			else
-				stack_reverse_rotate(stack_1);
-		}
-		pos--;
-	}
-}
-
 void	reverse_rotate_stack(t_stack *stack_1, t_chunk chunk)
 {
 	int	i;
@@ -97,157 +75,149 @@ int	is_part_of_chunk(int cont, t_chunk chunk)
 		return (0);
 }
 
-/*
-	return: Returns the position of the element on the stack counting from the top.
-		ch: 1 -> the number belong to chunk_1 
-			2 -> the number belong to chunk_2
-*/
-int	search_content_in_the_chunks(t_stack stack, t_chunk *chunk_1, t_chunk *chunk_2, int *ch)
+
+int get_mov_a_to_b(t_mov *list_mov, t_stack stack, t_chunk *chunk_1, t_chunk *chunk_2)
 {
 	int	i;
-	int	content;
+	int cont;
 	t_list	*elem;
-
+	
+	init_movs_list(list_mov);
 	elem = get_element(stack, TOP);
 	i = 0;	
 	while (elem != NULL)
 	{
-		content = get_elem_cont(elem);
-		if (chunk_1 && is_part_of_chunk(content, *chunk_1))
+		cont = get_elem_cont(elem);
+		if (is_part_of_chunk(cont, *chunk_1) || is_part_of_chunk(cont, *chunk_2))
 		{
-			*ch = 1;
-			return (i);
-		}
-		else if (chunk_2 && is_part_of_chunk(content, *chunk_2))
-		{
-			*ch = 2;
-			return (i);
+			add_mov(list_mov, RA, i, 0);
+			add_mov(list_mov, PB, 1, 1);
+			if (chunk_2 && is_part_of_chunk(cont, *chunk_1))
+				add_mov(list_mov, RB, 1, 2);	
+			return (1);
 		}
 		elem = get_next_elem(elem, DOWN);
 		i++;
 	}
-	return (-1);
+	return (0);
 }
 
-void	move_chunks_unsorted_order(t_stack *stack_1, t_stack *stack_2, t_chunk *chunk_1, t_chunk *chunk_2)
+void	mov_a_to_b(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk_1, t_chunk *chunk_2)
 {
-	int	ch;
-	int	pos;
+	t_mov	list_movs[MOVS_LIST_SIZE];
 
-	pos = 1;
-	ch = 0;
-	while (pos >= 0)
-	{
-		pos = search_content_in_the_chunks(*stack_1, chunk_1, chunk_2, &ch);
-		if (pos >= 0)
-			move_element(stack_1, stack_2, pos, FROM_TOP, 0);
-		if (pos >= 0 && ch == 2)
-			stack_rotate(stack_2);
-	}	
+	while (get_mov_a_to_b(list_movs, *stack_a, chunk_1, chunk_2))
+		exec_movs(list_movs, stack_a, stack_b);
 }
 
 
-/*
-	IDEIA: receber os arrays e preencher. Nesse caso não necessita de retorno, nem 1º if
-*/
-void	find_big_and_smal_elem(int cont, int pos, int init, t_elem *big_elem, t_elem *smal_elem)
+int is_bigger1(int a, int b)
 {
-	if (init)
-	{
-		big_elem->cont = cont;
-		big_elem->pos = pos;
-		smal_elem->cont = cont;
-		smal_elem->pos = pos;
-	}
-	else if (cont > big_elem->cont)
-	{
-		big_elem->cont = cont;
-		big_elem->pos = pos;
-	}
-	else if (cont < smal_elem->cont)
-	{
-		smal_elem->cont = cont;
-		smal_elem->pos = pos;
-	}
+	if (a > b)
+		return (1);
+	return (0);
 }
 
-t_elem	verify_best_move(t_elem big_elem, t_elem smal_elem)
+int is_smaller1(int a, int b)
 {
-	if (big_elem.pos <= smal_elem.pos)
-		return (big_elem);
+	if (a < b)
+		return (1);
+	return (0);
+}
+
+
+t_pos get_best_pos(int stack_size, int pos)
+{
+	t_pos new_pos;
+
+	if (pos == -1 || !stack_size)
+		new_pos.pos = -1;
+	else if (pos > (int)(stack_size / 2))
+	{
+		new_pos.pos = stack_size - pos - 1;
+		new_pos.dir = FROM_BOT;
+	}
 	else
-		return(smal_elem);
+	{
+		new_pos.pos = pos;
+		new_pos.dir = FROM_TOP;
+	}
+	return (new_pos);
 }
 
-/*
-		 return: (= -1) -> don't find element
-				 (>= 0) -> position of found element 
-	big_or_smal: (= 1) -> the biggest element was found
-				 (= 0) -> the smallest element was found
-*/
-t_elem	search_element(t_stack stack, t_chunk chunk, int dir)
+t_pos search_elem1(t_stack stack, t_chunk chunk, int (*comp)(int, int))
 {
 	t_list	*elem;
-	t_elem	big_elem;
-	t_elem	smal_elem;
-	int		init;
-	int		i;
+	t_list	*elem_found;
+	int i;
+	int pos;
 
-	i = 0;	
-	init = 1;
-	big_elem.id = BIGGER;
-	big_elem.pos = -1;
-	smal_elem.id = SMALLER;
-	smal_elem.pos = -1;
-	elem = get_element(stack, dir);
+	elem = get_element(stack, TOP);
+	elem_found = 0;
+	i = 0;
+	pos = -1;
 	while (elem != NULL)
 	{
 		if (is_part_of_chunk(get_elem_cont(elem), chunk))
 		{
-			find_big_and_smal_elem(get_elem_cont(elem), i, init, &big_elem, &smal_elem);
-			if (init)
-				init = 0;
+			if (!elem_found)
+				elem_found = elem;
+			if(comp(get_elem_cont(elem), get_elem_cont(elem_found)))
+				elem_found = elem;
+			if (elem_found == elem)
+				pos = i;
 		}
-		elem = get_next_elem(elem, dir);
+		elem = get_next_elem(elem, DOWN);
 		i++;
 	}
-	return (verify_best_move(big_elem, smal_elem));
+	return (get_best_pos(i, pos));
 }
 
-void move_chunck_sorted_order(t_stack *stack_1, t_stack *stack_2, t_chunk chunk)
+void get_elem_mov(t_mov *list_mov, t_pos p, int is_bigger)
 {
-	t_elem	elem_1;
-	t_elem	elem_2;
-
-	elem_1.pos = 1;
-	while (elem_1.pos >= 0 || elem_2.pos >= 0)
-	{
-		elem_1 = search_element(*stack_2, chunk, FROM_TOP);
-		elem_2 = search_element(*stack_2, chunk, FROM_BOT);
-		if (elem_1.pos <= elem_2.pos && (elem_1.pos >= 0 &&  elem_1.pos >= 0))
-		{
-			if (elem_1.id == BIGGER)
-				move_element(stack_2, stack_1, elem_1.pos, FROM_TOP, 0);
-			else 
-				move_element(stack_2, stack_1, elem_1.pos, FROM_TOP, 1);
-		}
-		else if (elem_1.pos >= 0 &&  elem_1.pos >= 0) 
-		{
-			if (elem_2.id == BIGGER)
-				move_element(stack_2, stack_1, elem_2.pos, FROM_BOT, 0);
-			else 
-				move_element(stack_2, stack_1, elem_2.pos, FROM_BOT, 1);
-		}
-	}
+	if (p.dir == FROM_TOP)
+		add_mov(list_mov, RB, p.pos, 0);
+	else 
+		add_mov(list_mov, RRB, p.pos + 1, 0);
+	add_mov(list_mov, PA, 1, 1);
+	if (!is_bigger)
+		add_mov(list_mov, RA, 1, 2);
 }
 
-void	stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk, int	num_chunks)
+int get_mov_b_to_a(t_mov *list_mov, t_stack stack, t_chunk chunk)
 {
+	t_pos p_big;
+	t_pos p_smal;
+
+	init_movs_list(list_mov);
+	p_big = search_elem1(stack, chunk,  &is_bigger1);
+	p_smal = search_elem1(stack, chunk, &is_smaller1);
+	if (p_big.pos == -1 || p_smal.pos == -1)
+		return (0);
+	if (p_big.pos <= p_smal.pos)
+		get_elem_mov(list_mov, p_big, 1);
+	else
+		get_elem_mov(list_mov, p_smal, 0);
+	return (1);
+}
+
+void	mov_b_to_a(t_stack *stack_a, t_stack *stack_b, t_chunk chunk)
+{
+	t_mov	list_movs[MOVS_LIST_SIZE];
+
+
+	while (get_mov_b_to_a(list_movs, *stack_b, chunk))
+		exec_movs(list_movs, stack_a, stack_b);
+}
+
+void	sort_more_five_num(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk, int num_chunks)
+{
+	t_mov	list_movs[MOVS_LIST_SIZE];
 	int	aux;
 	int	i1;
 	int	i2;
-
-	aux = (int)(num_chunks * 0.75);
+	
+	aux = (int)(num_chunks * 0.85);
 	if (aux % 2 == 0)
 		aux--;
 	aux = (int)(aux / 2);
@@ -256,19 +226,18 @@ void	stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk, int	num_chun
 	while(i2 < num_chunks)
 	{
 		if (i1 >= 0)
-			move_chunks_unsorted_order(stack_a, stack_b, &chunk[i1--], &chunk[i2++]);
+			mov_a_to_b(stack_a, stack_b, &chunk[i1--], &chunk[i2++]);
 		else 
-			move_chunks_unsorted_order(stack_a, stack_b, &chunk[i2++], 0);
+			mov_a_to_b(stack_a, stack_b, &chunk[i2++], 0);
 	}
 	i1 = num_chunks - 1;
 	while (i1 >= 0)
 	{
-		move_chunck_sorted_order(stack_a, stack_b, chunk[i1]);
+		mov_b_to_a(stack_a, stack_b, chunk[i1]);
+		//move_chunck_sorted_order(stack_a, stack_b, chunk[i1]);
 		reverse_rotate_stack(stack_a, chunk[i1--]);
 	}
 }
-
-
 
 
 //#############################################
@@ -424,7 +393,7 @@ void sort_five_num(t_stack *stack_1, t_stack *stack_2)
 		stack_push(stack_2, stack_1);
 }
 
-
+// SORT TWO NUMBERS
 void sort_two_num(t_stack *stack)
 {
 	t_list	*top;
@@ -435,4 +404,3 @@ void sort_two_num(t_stack *stack)
 	if (compare_cont(top, bot))
 		stack_swap(stack);
 }
-

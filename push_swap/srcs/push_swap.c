@@ -1,6 +1,6 @@
 #include "../includes/push_swap.h"
 
-//gcc push_swap.c list.c stack_mov.c stack_mov_print.c sort_algorithm.c get_input_args.c get_input_args_utils.c utils.c get_chunks.c input_verifications.c sort_array.c
+//gcc push_swap.c list.c stack_mov.c stack_mov_print.c sort_algorithm.c get_input_args.c get_input_args_utils.c utils.c get_chunks.c input_verifications.c sort_array.c movs_list.c 
 
 // ./a.out $ARG | wc -l
 // ./a.out $ARG | ./checker_linux $ARG
@@ -60,7 +60,20 @@ int main(int argc, char **argv)
 		free(sorted_arr);
 		return (0);
 	}
-		
+
+	/// TESTE
+	/*create_list(&stack_a, num_list, size);
+	num_chunks = get_chunks(chunk, sorted_arr, size);
+	printf("\n-------chunk 1-------\n");
+	printf("\nmax: %i  min: %i", chunk[0].max, chunk[0].min);
+
+	sort_more_five_num(&stack_a, &stack_b, chunk, num_chunks);
+	printf("\n-------STACK A-------\n");
+	print_stack(stack_a);
+	printf("\n-------STACK B-------\n");
+	print_stack(stack_b);*/
+
+	
 	if (!is_sorted(num_list, size))
 	{
 		create_list(&stack_a, num_list, size);
@@ -73,9 +86,13 @@ int main(int argc, char **argv)
 		else if (size > 5)
 		{
 			num_chunks = get_chunks(chunk, sorted_arr, size);
-			stack_sort(&stack_a, &stack_b, chunk, num_chunks);
+			sort_more_five_num(&stack_a, &stack_b, chunk, num_chunks);
+			//stack_sort(&stack_a, &stack_b, chunk, num_chunks);
+
 		}
 	}
 	free(sorted_arr);
+	
+
 	return (0);
 }
