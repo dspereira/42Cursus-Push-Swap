@@ -1,6 +1,7 @@
 #include "../includes/push_swap.h"
 
-//gcc push_swap.c list.c stack_mov.c stack_mov_print.c sort_algorithm.c get_input_args.c get_input_args_utils.c utils.c get_chunks.c input_verifications.c sort_array.c movs_list.c 
+//gcc sort_algorithm/*.c push_swap.c list.c stack_mov.c stack_mov_print.c get_input_args.c get_input_args_utils.c utils.c get_chunks.c input_verifications.c sort_array.c
+
 
 // ./a.out $ARG | wc -l
 // ./a.out $ARG | ./checker_linux $ARG
@@ -86,7 +87,7 @@ int main(int argc, char **argv)
 		else if (size > 5)
 		{
 			num_chunks = get_chunks(chunk, sorted_arr, size);
-			sort_more_five_num(&stack_a, &stack_b, chunk, num_chunks);
+			sort_many_num(&stack_a, &stack_b, chunk, num_chunks);
 			//stack_sort(&stack_a, &stack_b, chunk, num_chunks);
 
 		}
