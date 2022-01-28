@@ -1,7 +1,6 @@
 #include "../includes/push_swap.h"
 
-//gcc sort_algorithm/*.c push_swap.c list.c stack_mov.c stack_mov_print.c get_input_args.c get_input_args_utils.c utils.c get_chunks.c input_verifications.c sort_array.c
-//gcc sort_algorithm/*.c input_args/*.c push_swap.c list.c stack_mov.c stack_mov_print.c utils.c get_chunks.c sort_array.c
+//gcc sort_algorithm/*.c input_args/*.c stack/*.c get_chunks/*.c  push_swap.c utils.c
 
 
 // ./a.out $ARG | wc -l
