@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 	else if (size == 0)
 		return (0);
 
-	sorted_arr = sort_array(num_list, size);
+	sorted_arr = input_array_sort(num_list, size);
 	if (input_check_repeted_num(sorted_arr, size))
 	{
 		printf("Error\n");

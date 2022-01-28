@@ -99,7 +99,7 @@ int get_chunks(t_chunk *chunk, int *num_list, int size);
 
 
 /*  sort_array.c  */
-int *sort_array(const int *src, int size);
+int *input_array_sort(const int *src, int size);
 
 
 // funções da libft retirar daqui

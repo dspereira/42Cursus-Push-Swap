@@ -1,9 +1,9 @@
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
-int *array_dup(const int *src, int size)
+int	*array_dup(const int *src, int size)
 {
-	int *dst;
-	int i;
+	int	*dst;
+	int	i;
 
 	dst = malloc(size * sizeof(int));
 	if (!dst)
@@ -14,15 +14,15 @@ int *array_dup(const int *src, int size)
 		dst[i] = src[i];
 		i++;
 	}
-	return(dst);
+	return (dst);
 }
 
-int *sort_array(const int *src, int size)
+int	*input_array_sort(const int *src, int size)
 {
-	int i;	
-	int j;
-	int buff;
-	int *dst;
+	int	i;	
+	int	j;
+	int	buff;
+	int	*dst;
 
 	dst = array_dup(src, size);
 	i = 0;
@@ -41,5 +41,5 @@ int *sort_array(const int *src, int size)
 		}
 		i++;
 	}
-	return (dst);	
+	return (dst);
 }
