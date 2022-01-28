@@ -69,7 +69,8 @@ typedef struct s_mov_elm
 
 
 /*  stack.c  */
-void stack_create(t_stack *stack, int *cont, int size);
+t_stack	stack_init(char id);
+void stack_fill(t_stack *stack, int *cont, int size);
 void stack_free(t_stack *stack);
 
 /*  stack_mov.c  */
@@ -79,11 +80,10 @@ void stack_reverse_rotate(t_stack *stack);
 void stack_push(t_stack *stack_1, t_stack *stack_2);
 
 // sort algorithm
-void	stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk, int	num_chunks);
 void sort_three_num(t_stack *stack);
 void sort_five_num(t_stack *stack_1, t_stack *stack_2);
 void sort_two_num(t_stack *stack);
-
+void	sort_many_num(t_stack *st_a, t_stack *st_b, t_chunk *ch, int num_ch);
 
 /* get_input_args */
 int	get_input_args(char **args, int argc, int **dst);
@@ -106,9 +106,5 @@ int *input_array_sort(const int *src, int size);
 size_t	ft_strlen(const char *s);
 char	**ft_split(char const *s, char c);
 
-
-// TESTE
-//void	stack_sort1(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk);
-void	sort_many_num(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk, int num_chunks);
-
-
+/*  push_swap.c  */
+void push_swap(int in_size, char **in);

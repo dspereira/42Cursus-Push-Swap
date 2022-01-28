@@ -1,7 +1,17 @@
 #include "../../includes/push_swap.h"
 #include "list.h"
 
-void	stack_create(t_stack *stack, int *cont, int size)
+t_stack stack_init(char id)
+{
+	t_stack stack;
+
+	stack.id = id;
+	stack.first_elem = 0;
+	stack.last_elem = 0;
+	return stack;
+}
+
+void	stack_fill(t_stack *stack, int *cont, int size)
 {
 	int	i;
 
