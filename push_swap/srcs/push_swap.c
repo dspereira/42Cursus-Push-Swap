@@ -1,6 +1,7 @@
 #include "../includes/push_swap.h"
 
 //gcc sort_algorithm/*.c push_swap.c list.c stack_mov.c stack_mov_print.c get_input_args.c get_input_args_utils.c utils.c get_chunks.c input_verifications.c sort_array.c
+//gcc sort_algorithm/*.c input_args/*.c push_swap.c list.c stack_mov.c stack_mov_print.c utils.c get_chunks.c sort_array.c
 
 
 // ./a.out $ARG | wc -l
@@ -55,7 +56,7 @@ int main(int argc, char **argv)
 		return (0);
 
 	sorted_arr = sort_array(num_list, size);
-	if (have_repeated_numbers(sorted_arr, size))
+	if (input_check_repeted_num(sorted_arr, size))
 	{
 		printf("Error\n");
 		free(sorted_arr);
@@ -75,7 +76,7 @@ int main(int argc, char **argv)
 	print_stack(stack_b);*/
 
 	
-	if (!is_sorted(num_list, size))
+	if (!input_check_is_sort(num_list, size))
 	{
 		create_list(&stack_a, num_list, size);
 		if (size == 2)

@@ -88,24 +88,22 @@ void	stack_sort(t_stack *stack_a, t_stack *stack_b, t_chunk *chunk, int	num_chun
 void sort_three_num(t_stack *stack);
 void sort_five_num(t_stack *stack_1, t_stack *stack_2);
 void sort_two_num(t_stack *stack);
-int get_input_args(char **args, int argc, int **arr);
 
 
-int get_size_matrix(char **m);
-void free_matrix(char **m, int size);
-long int	atoi_long(char *str);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
+/* get_input_args */
+int	get_input_args(char **args, int argc, int **dst);
+
+/*  input_check  */
+int input_check_is_sort(int *arr, int size);
+int input_check_repeted_num(int *arr, int size);
 
 
 /*  get_chunks.c  */
 int get_chunks(t_chunk *chunk, int *num_list, int size);
 
-/*  verifications.c  */
-int is_longer_than_int(char *str);
-int is_range_int(long int nb);
-int	is_numeric(char *str);
-int is_sorted(int *arr, int size);
-int have_repeated_numbers(const int *arr, int size);
+
+
+
 
 /*  sort_array.c  */
 int *sort_array(const int *src, int size);

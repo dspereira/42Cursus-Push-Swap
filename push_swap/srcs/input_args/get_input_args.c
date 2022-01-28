@@ -1,5 +1,17 @@
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
+#include "get_input_args_utils.h"
 
+int	get_size_matrix(char **m)
+{
+	int	i;
+
+	if (!m)
+		return (0);
+	i = 0;
+	while (m[i])
+		i++;
+	return (i);
+}
 
 /*
  *    return: 1 -> conversion sucess
