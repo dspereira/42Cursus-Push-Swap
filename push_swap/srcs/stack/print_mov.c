@@ -1,8 +1,8 @@
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
-void stack_print_mov(char *mov, char stack_id)
+void	print_mov(char *mov, char stack_id)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (mov[i] != '\0')

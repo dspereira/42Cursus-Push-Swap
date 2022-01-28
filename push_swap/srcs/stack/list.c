@@ -1,6 +1,7 @@
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
+#include "list.h"
 
-t_list	*ft_lstnew(int content)
+t_list	*list_new(int content)
 {
 	t_list	*elem;
 
@@ -13,9 +14,9 @@ t_list	*ft_lstnew(int content)
 	return (elem);
 }
 
-void	ft_lstadd_front(t_stack *stack, t_list *new)
+void	list_add_front(t_stack *stack, t_list *new)
 {
-   	if (!new)
+	if (!new)
 		return ;
 	if (stack->first_elem)
 	{
@@ -31,7 +32,7 @@ void	ft_lstadd_front(t_stack *stack, t_list *new)
 	}
 }
 
-void	ft_lstadd_back(t_stack *stack, t_list *new)
+void	list_add_back(t_stack *stack, t_list *new)
 {
 	if (!new)
 		return ;
@@ -47,17 +48,4 @@ void	ft_lstadd_back(t_stack *stack, t_list *new)
 		stack->first_elem = new;
 		stack->last_elem = new;
 	}
-}
-
-void create_list(t_stack *stack, int *cont, int size)
-{
-	int i;
-	
-	i = 0;
-	while(i < size)
-	{
-		ft_lstadd_front(stack, ft_lstnew(cont[i]));
-		i++;
-	}
-	stack->size = size;
 }

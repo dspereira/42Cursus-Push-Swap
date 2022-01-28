@@ -24,7 +24,7 @@ t_stack init_stack(char id)
 	t_stack stack;
 
 	stack.id = id;
-	stack.size = 0;
+	//stack.size = 0;
 	stack.first_elem = 0;
 	stack.last_elem = 0;
 	return stack;
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
 	
 	if (!input_check_is_sort(num_list, size))
 	{
-		create_list(&stack_a, num_list, size);
+		stack_create(&stack_a, num_list, size);
 		if (size == 2)
 			sort_two_num(&stack_a);
 		else if (size == 3)
@@ -92,7 +92,10 @@ int main(int argc, char **argv)
 			//stack_sort(&stack_a, &stack_b, chunk, num_chunks);
 
 		}
+		stack_free(&stack_a);
 	}
+	
+	
 	free(sorted_arr);
 	
 
