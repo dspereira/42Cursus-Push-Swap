@@ -3,7 +3,7 @@
 
 int	get_stack_size(t_stack stack)
 {
-	t_list	*elem;
+	t_lst	*elem;
 	int		i;
 
 	i = 0;
@@ -18,7 +18,7 @@ int	get_stack_size(t_stack stack)
 
 int	get_pos_smaller(t_stack stack)
 {
-	t_list	*elem;
+	t_lst	*elem;
 	int		cont;
 	int		pos;
 	int		i;

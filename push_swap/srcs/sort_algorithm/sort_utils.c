@@ -15,12 +15,12 @@ int	is_smaller(int a, int b)
 	return (0);
 }
 
-int	get_elem_cont(t_list *elem)
+int	get_elem_cont(t_lst *elem)
 {
 	return (elem->content);
 }
 
-t_list	*get_elem(t_stack stack, int pos)
+t_lst	*get_elem(t_stack stack, int pos)
 {
 	if (pos == TOP)
 		return (stack.last_elem);
@@ -28,7 +28,7 @@ t_list	*get_elem(t_stack stack, int pos)
 		return (stack.first_elem);
 }
 
-t_list	*get_next_elem(t_list *elem, int dir)
+t_lst	*get_next_elem(t_lst *elem, int dir)
 {
 	if (dir == DOWN)
 		return (elem->prev);

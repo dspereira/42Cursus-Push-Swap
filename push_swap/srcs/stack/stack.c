@@ -25,8 +25,8 @@ void	stack_fill(t_stack *stack, int *cont, int size)
 
 void	stack_free(t_stack *stack)
 {
-	t_list	*elem;
-	t_list	*next;
+	t_lst	*elem;
+	t_lst	*next;
 
 	elem = stack->first_elem;
 	while (elem)

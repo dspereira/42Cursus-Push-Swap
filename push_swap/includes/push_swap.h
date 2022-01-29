@@ -1,6 +1,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+#include "../srcs/libft/libft.h"
+
 
 #define STACK_A 'a'
 #define STACK_B 'b'
@@ -24,19 +26,19 @@
 
 
 
-typedef struct s_list
+typedef struct s_lst
 {
 	int             content;
-	struct s_list	*next;
-    struct s_list	*prev;
-}	t_list;
+	struct s_lst	*next;
+    struct s_lst	*prev;
+}	t_lst;
 
 
 typedef struct s_stack
 {
 	char id;	
-	t_list *first_elem;
-	t_list *last_elem;
+	t_lst *first_elem;
+	t_lst *last_elem;
 }	t_stack;
 
 typedef struct s_chunk
@@ -99,10 +101,11 @@ int *input_array_sort(const int *src, int size);
 
 
 // funções da libft retirar daqui
+/*
 size_t	ft_strlen(const char *s);
 char	**ft_split(char const *s, char c);
 void	ft_putstr_fd(char *s, int fd);
-
+*/
 
 
 /*  push_swap.c  */

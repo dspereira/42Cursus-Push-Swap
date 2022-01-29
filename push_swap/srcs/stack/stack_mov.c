@@ -2,7 +2,7 @@
 #include "print_mov.h"
 #include "list.h"
 
-void	swap_content(t_list *elem1, t_list *elem2)
+void	swap_content(t_lst *elem1, t_lst *elem2)
 {
 	int	content_tmp;
 
@@ -21,7 +21,7 @@ void	stack_swap(t_stack *stack)
 
 void	stack_rotate(t_stack *stack)
 {
-	t_list	*last_temp;
+	t_lst	*last_temp;
 
 	if (!(stack->last_elem) || !(stack->last_elem->prev))
 		return ;
@@ -34,7 +34,7 @@ void	stack_rotate(t_stack *stack)
 
 void	stack_reverse_rotate(t_stack *stack)
 {
-	t_list	*first_temp;
+	t_lst	*first_temp;
 
 	if (!(stack->last_elem) || !(stack->last_elem->prev))
 		return ;
@@ -47,7 +47,7 @@ void	stack_reverse_rotate(t_stack *stack)
 
 void	stack_push(t_stack *stack_1, t_stack *stack_2)
 {
-	t_list	*last_temp;
+	t_lst	*last_temp;
 
 	if (!(stack_1->last_elem))
 		return ;

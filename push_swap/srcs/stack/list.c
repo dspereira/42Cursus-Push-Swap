@@ -1,18 +1,18 @@
 #include "../../includes/push_swap.h"
 #include "list.h"
 
-t_list	*list_new(int content)
+t_lst	*list_new(int content)
 {
-	t_list	*elem;
+	t_lst	*elem;
 
-	elem = oom_guard(malloc(sizeof(t_list)));
+	elem = oom_guard(malloc(sizeof(t_lst)));
 	elem->content = content;
 	elem->next = NULL;
 	elem->prev = NULL;
 	return (elem);
 }
 
-void	list_add_front(t_stack *stack, t_list *new)
+void	list_add_front(t_stack *stack, t_lst *new)
 {
 	if (!new)
 		return ;
@@ -30,7 +30,7 @@ void	list_add_front(t_stack *stack, t_list *new)
 	}
 }
 
-void	list_add_back(t_stack *stack, t_list *new)
+void	list_add_back(t_stack *stack, t_lst *new)
 {
 	if (!new)
 		return ;

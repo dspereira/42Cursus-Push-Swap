@@ -1,5 +1,6 @@
 #include "../../includes/push_swap.h"
 
+/*
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -106,6 +107,9 @@ void	ft_putstr_fd(char *s, int fd)
 		}
 	}	
 }
+*/
+
+
 
 void *oom_guard(void *p)
 {

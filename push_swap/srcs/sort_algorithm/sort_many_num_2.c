@@ -44,8 +44,8 @@ t_pos	get_best_pos(int stack_size, int pos)
 
 t_pos	search_elem1(t_stack stack, t_chunk chunk, int (*comp)(int, int))
 {
-	t_list	*elem;
-	t_list	*elem_found;
+	t_lst	*elem;
+	t_lst	*elem_found;
 	int		i;
 	int		pos;
 

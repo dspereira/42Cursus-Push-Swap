@@ -3,9 +3,9 @@
 
 void	sort_three_num(t_stack *stack)
 {
-	t_list	*top;
-	t_list	*bot;
-	t_list	*mid;
+	t_lst	*top;
+	t_lst	*bot;
+	t_lst	*mid;
 	int		i;
 
 	i = 0;

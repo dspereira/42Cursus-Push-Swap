@@ -7,7 +7,7 @@ int	get_mov_a_to_b(t_mov *list_mov, t_stack stack, t_chunk *ch_1, t_chunk *ch_2)
 {
 	int		i;
 	int		cont;
-	t_list	*elem;
+	t_lst	*elem;
 
 	init_movs_list(list_mov);
 	elem = get_elem(stack, TOP);
