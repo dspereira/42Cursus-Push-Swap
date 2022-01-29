@@ -1,4 +1,5 @@
 #include "../../includes/push_swap.h"
+#include <stdio.h>
 
 int	*array_dup(const int *src, int size)
 {
@@ -15,11 +16,20 @@ int	*array_dup(const int *src, int size)
 	return (dst);
 }
 
+int	swap(int *a, int *b)
+{
+	int	buff;
+
+	buff = *a;
+	*a = *b;
+	*b = buff;
+	return (1);
+}
+
 int	*input_array_sort(const int *src, int size)
 {
 	int	i;	
 	int	j;
-	int	buff;
 	int	*dst;
 	int	made_swap;
 
@@ -29,20 +39,15 @@ int	*input_array_sort(const int *src, int size)
 	while (i < size)
 	{
 		j = 0;
+		made_swap = 0;
 		while (j < size - 1)
 		{
-			//ft_putstr_fd("\npassou aqui", FD);
 			if (dst[j] > dst[j + 1])
-			{
-				buff = dst[j];
-				dst[j] = dst[j + 1];
-				dst[j + 1] = buff;
-				made_swap = 1;
-			}
+				made_swap = swap(&dst[j], &dst[j + 1]);
 			j++;
 		}
-		//if (!made_swap)
-		//	break;
+		if (!made_swap)
+			break ;
 		i++;
 	}
 	return (dst);
