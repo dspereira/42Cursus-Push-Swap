@@ -2,12 +2,11 @@
 
 void	print_mov(char *mov, char stack_id)
 {
-	int	i;
+	char	arr[3];
 
-	i = 0;
-	while (mov[i] != '\0')
-		i++;
-	write(1, mov, i);
-	write(1, &stack_id, 1);
-	write(1, "\n", 1);
+	arr[0] = stack_id;
+	arr[1] = '\n';
+	arr[2] = '\0';
+	ft_putstr_fd(mov, FD);
+	ft_putstr_fd(arr, FD);
 }

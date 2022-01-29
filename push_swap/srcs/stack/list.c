@@ -5,9 +5,7 @@ t_list	*list_new(int content)
 {
 	t_list	*elem;
 
-	elem = malloc(sizeof(t_list));
-	if (!elem)
-		return (0);
+	elem = oom_guard(malloc(sizeof(t_list)));
 	elem->content = content;
 	elem->next = NULL;
 	elem->prev = NULL;

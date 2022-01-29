@@ -94,3 +94,25 @@ char	**ft_split(char const *s, char c)
 	arr[j] = 0;
 	return (arr);
 }
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s && fd >= 0)
+	{
+		while (*s != '\0')
+		{
+			write(fd, &(*s), 1);
+			s++;
+		}
+	}	
+}
+
+void *oom_guard(void *p)
+{
+	if (!p)
+	{
+		ft_putstr_fd("Out of memory!\n", FD);
+		exit(EXIT_FAILURE);
+	}
+	return p;
+}

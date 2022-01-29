@@ -2,6 +2,12 @@
 
 //gcc sort_algorithm/*.c input_args/*.c stack/*.c get_chunks/*.c push_swap/*.c
 
+void free_inp(int *a, int *b)
+{
+	free(a);
+	free(b);
+}
+
 void	stack_sort(int *in_arr, int *in_arr_sort, int size_arr)
 {
 	t_stack	stack_a;
@@ -35,7 +41,7 @@ void	push_swap(int in_size, char **in)
 	size = get_input_args(in, in_size, &in_arr);
 	if (size < 0)
 	{
-		printf("Error\n");
+		ft_putstr_fd("Error\n", FD);
 		return ;
 	}
 	else if (size == 0)
@@ -43,13 +49,13 @@ void	push_swap(int in_size, char **in)
 	in_arr_sort = input_array_sort(in_arr, size);
 	if (input_check_repeted_num(in_arr_sort, size))
 	{
-		printf("Error\n");
-		free(in_arr_sort);
+		ft_putstr_fd("Error\n", FD);
+		free_inp(in_arr, in_arr_sort);
 		return ;
 	}
 	if (!input_check_is_sort(in_arr, size))
 	{
 		stack_sort(in_arr, in_arr_sort, size);
 	}
-	free(in_arr_sort);
+	free_inp(in_arr, in_arr_sort);
 }

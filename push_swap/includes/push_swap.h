@@ -1,11 +1,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-// RETIRAR NO FINAL
-#include <stdio.h>
-
-# include <unistd.h>
-# include <stdlib.h>
 
 #define STACK_A 'a'
 #define STACK_B 'b'
@@ -25,6 +20,8 @@
 #define MAX_INT 2147483647
 #define MIN_INT -2147483648
 
+# define FD 1
+
 
 
 typedef struct s_list
@@ -38,7 +35,6 @@ typedef struct s_list
 typedef struct s_stack
 {
 	char id;	
-	//int size;
 	t_list *first_elem;
 	t_list *last_elem;
 }	t_stack;
@@ -105,6 +101,12 @@ int *input_array_sort(const int *src, int size);
 // funções da libft retirar daqui
 size_t	ft_strlen(const char *s);
 char	**ft_split(char const *s, char c);
+void	ft_putstr_fd(char *s, int fd);
+
+
 
 /*  push_swap.c  */
 void push_swap(int in_size, char **in);
+
+
+void *oom_guard(void *p);

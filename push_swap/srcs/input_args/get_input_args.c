@@ -38,9 +38,7 @@ int	*get_nb_array(char **m, int size)
 	int	*arr;
 	int	i;
 
-	arr = malloc(size * sizeof(int));
-	if (!arr)
-		return (0);
+	arr = oom_guard(malloc(size * sizeof(int)));
 	i = 0;
 	while (i < size)
 	{
@@ -65,7 +63,7 @@ int	parse_strs_to_array(char **src, int size, int **dst)
 	done_split = 0;
 	if (size == 1)
 	{
-		m = ft_split(src[0], ' ');
+		m = oom_guard(ft_split(src[0], ' '));
 		size = get_size_matrix(m);
 		done_split = 1;
 	}
