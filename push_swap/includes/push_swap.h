@@ -1,7 +1,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-#include "../srcs/libft/libft.h"
+#include "../libft/libft.h"
 
 
 #define STACK_A 'a'
