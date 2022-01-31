@@ -12,7 +12,7 @@ void	stack_sort(int *in_arr, int *in_arr_sort, int size_arr)
 {
 	t_stack	stack_a;
 	t_stack	stack_b;
-	t_chunk	chunk[15];
+	t_chunk	chunk[20];
 	int		num_chunks;
 
 	stack_a = stack_init(STACK_A);

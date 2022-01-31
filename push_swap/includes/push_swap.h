@@ -99,17 +99,11 @@ int get_chunks(t_chunk *chunk, int *num_list, int size);
 /*  sort_array.c  */
 int *input_array_sort(const int *src, int size);
 
-
-// funções da libft retirar daqui
-/*
-size_t	ft_strlen(const char *s);
-char	**ft_split(char const *s, char c);
-void	ft_putstr_fd(char *s, int fd);
-*/
-
-
 /*  push_swap.c  */
 void push_swap(int in_size, char **in);
 
 
 void *oom_guard(void *p);
+
+void	stack_rotate_mult(t_stack *stack, int n);
+void	stack_reverse_rotate_mult(t_stack *stack, int n);

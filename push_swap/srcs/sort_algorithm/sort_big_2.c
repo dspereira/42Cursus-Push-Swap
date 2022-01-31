@@ -1,19 +1,6 @@
 #include "../../includes/push_swap.h"
 #include "sort_utils.h"
-#include "sort_many_num.h"
-#include "moves_list.h"
-
-void	reverse_rotate_stack(t_stack *stack_1, t_chunk chunk)
-{
-	int	i;
-
-	i = 0;
-	while (stack_1->last_elem->content != chunk.min)
-	{
-		stack_reverse_rotate(stack_1);
-		i++;
-	}
-}
+#include "sort_big.h"
 
 int	is_part_of_chunk(int cont, t_chunk chunk)
 {
@@ -42,7 +29,7 @@ t_pos	get_best_pos(int stack_size, int pos)
 	return (new_pos);
 }
 
-t_pos	search_elem1(t_stack stack, t_chunk chunk, int (*comp)(int, int))
+t_pos	search_elem(t_stack stack, t_chunk chunk, int (*comp)(int, int))
 {
 	t_lst	*elem;
 	t_lst	*elem_found;
@@ -70,13 +57,29 @@ t_pos	search_elem1(t_stack stack, t_chunk chunk, int (*comp)(int, int))
 	return (get_best_pos(i, pos));
 }
 
-void	get_elem_mov(t_mov *list_mov, t_pos p, int is_bigger)
+void	mov_elem(t_stack *stack_a, t_stack *stack_b, t_pos p, int is_bigger)
 {
 	if (p.dir == FROM_TOP)
-		add_mov(list_mov, RB, p.pos);
+		stack_rotate_mult(stack_b, p.pos);
 	else
-		add_mov(list_mov, RRB, p.pos + 1);
-	add_mov(list_mov, PA, 1);
+		stack_reverse_rotate_mult(stack_b, p.pos + 1);
+	stack_push(stack_b, stack_a);
 	if (!is_bigger)
-		add_mov(list_mov, RA, 1);
+		stack_rotate(stack_a);
+}
+
+int	mov_b_to_a(t_stack *stack_a, t_stack *stack_b, t_chunk chunk)
+{
+	t_pos	p_big;
+	t_pos	p_smal;
+
+	p_big = search_elem(*stack_b, chunk, &is_bigger);
+	p_smal = search_elem(*stack_b, chunk, &is_smaller);
+	if (p_big.pos == -1 || p_smal.pos == -1)
+		return (0);
+	if (p_big.pos <= p_smal.pos)
+		mov_elem(stack_a, stack_b, p_big, 1);
+	else
+		mov_elem(stack_a, stack_b, p_smal, 0);
+	return (1);
 }

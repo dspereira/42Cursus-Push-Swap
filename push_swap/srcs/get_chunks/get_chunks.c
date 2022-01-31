@@ -9,9 +9,9 @@ int	get_chunks(t_chunk *chunk, int *num_list, int size)
 	if (size > 5 && size < 50)
 		num_chunks = 2;
 	else if (size >= 50 && size < 250)
-		num_chunks = 5;
+		num_chunks = 6;
 	else if (size >= 250)
-		num_chunks = 13;
+		num_chunks = 18;
 	div = size / num_chunks;
 	count = 0;
 	while (count < num_chunks)
