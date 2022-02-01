@@ -20,9 +20,9 @@ CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -I./includes
 RM			= rm -f
 
-MAKE_LIBFT	= make -C libft/
-CLEAN_LIBFT	= make clean -C libft/
-FCLEAN_LIBFT	= make clean -C libft/
+MAKE_LIBFT		= make -C libft/
+CLEAN_LIBFT		= make clean -C libft/
+FCLEAN_LIBFT	= make fclean -C libft/
 
 all: $(NAME)
 
@@ -31,11 +31,12 @@ $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(LIBFT) -o $(NAME) 
 
 clean:
-	$(RM) $(OBJS) $(BONUS_OBJS)
 	$(CLEAN_LIBFT)
+	$(RM) $(OBJS) $(BONUS_OBJS)
+	
 
 fclean: clean
+	$(FCLEAN_LIBFT)
 	$(RM) $(NAME)
-	$(CLEAN_FLIBFT)
 
 re:	fclean all
