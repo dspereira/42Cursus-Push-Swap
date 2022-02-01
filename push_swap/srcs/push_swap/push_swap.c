@@ -1,7 +1,5 @@
 #include "../../includes/push_swap.h"
 
-//gcc sort_algorithm/*.c input_args/*.c stack/*.c get_chunks/*.c push_swap/*.c
-
 void free_inp(int *a, int *b)
 {
 	free(a);
@@ -27,7 +25,7 @@ void	stack_sort(int *in_arr, int *in_arr_sort, int size_arr)
 	else if (size_arr > 5)
 	{
 		num_chunks = get_chunks(chunk, in_arr_sort, size_arr);
-		sort_many_num(&stack_a, &stack_b, chunk, num_chunks);
+		sort_big(&stack_a, &stack_b, chunk, num_chunks);
 	}
 	stack_free(&stack_a);
 }

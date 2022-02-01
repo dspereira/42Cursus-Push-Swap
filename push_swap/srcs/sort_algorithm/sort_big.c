@@ -39,7 +39,7 @@ int	mov_a_to_b(t_stack *stack_a, t_stack *stack_b, t_chunk *ch_1, t_chunk *ch_2)
 	return (0);
 }
 
-void	sort_many_num(t_stack *st_a, t_stack *st_b, t_chunk *ch, int num_ch)
+void	sort_big(t_stack *st_a, t_stack *st_b, t_chunk *ch, int num_ch)
 {
 	int		i;
 	int		j;

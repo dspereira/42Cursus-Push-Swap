@@ -55,7 +55,7 @@ int	*get_nb_array(char **m, int size)
 /*
  *   return size of dst array
  */
-int	parse_strs_to_array(char **src, int size, int **dst)
+int	parse_input_args(char **src, int size, int **dst)
 {
 	char	**m;
 	int		done_split;
@@ -88,7 +88,7 @@ int	get_input_args(char **args, int argc, int **dst)
 
 	if (argc < 2)
 		return (0);
-	size = parse_strs_to_array((args + 1), (argc - 1), dst);
+	size = parse_input_args((args + 1), (argc - 1), dst);
 	if (size)
 		return (size);
 	return (-1);
