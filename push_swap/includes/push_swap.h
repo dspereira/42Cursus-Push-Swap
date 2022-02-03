@@ -82,7 +82,7 @@ int		*input_array_sort(const int *src, int size);
 /*  push_swap.c  */
 void	push_swap(int in_size, char **in);
 
-/*  push_swap/utils.c  */
+/*  utils.c  */
 void	*oom_guard(void *p);
 
 #endif
