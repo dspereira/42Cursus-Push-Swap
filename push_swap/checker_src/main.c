@@ -5,15 +5,8 @@
 #define STD_IN_FD 0
 #define STD_OUT_FD 1
 
-/*
-Receber o standard input e colocar em uma lista da libft e fazer print da mesma pela ordem recebida
-Criar ficheiro get_moves.c e get_list_num.c
 
-- Ler parametros de entrada e colocar numa lista. Ler standard input e colocar a stack A.
-- ler os movimentos um a um e aplicar à lista usado os movimentos já criados para o push_swap.
-- no final verificar se a lista está sorted e se a stack B está vazia
 
-*/
 
 void free_moves_list(t_list **lst)
 {
@@ -46,31 +39,100 @@ int has_repeted_num(int *input, int size)
 	return (has_repeted);
 }
 
-t_list *get_moves_list(void)
+int get_moves_list(t_list **lst)
 {
-	t_list *lst;
+	//t_list *lst;
 	t_list *new;
 	char *line;
+	int error;
 
-	lst = 0;
+	*lst = 0;
+	error = 0;
 	line = get_next_line(STD_IN_FD);
 	while (line)
 	{
 		if (is_mov_valid(line))
 		{
 			new = oom_guard(ft_lstnew(line));
-			ft_lstadd_back(&lst, new);
+			ft_lstadd_back(lst, new);
 			line = get_next_line(STD_IN_FD);
 		}
 		else 
 		{
-			free_moves_list(&lst);
-			lst = 0;
+			free_moves_list(lst);
+			error = 1;
 			break;
 		}
-
 	}
-	return (lst);
+	return (error);
+}
+
+void execute_moves(t_stack *stack_a, t_stack *stack_b, t_list *mov_list)
+{
+	t_list *movs;
+	char *cont;
+	int cont_len;
+
+	movs = mov_list;
+	while (movs)
+	{
+		cont = movs->content;
+		cont_len = ft_strlen(movs->content);
+		if (!ft_strncmp("ra\n", cont, cont_len))
+			stack_rotate(stack_a);
+		else if (!ft_strncmp("rb\n", cont, cont_len))
+			stack_rotate(stack_b);
+		else if (!ft_strncmp("rra\n", cont, cont_len))
+			stack_reverse_rotate(stack_a);
+		else if (!ft_strncmp("rrb\n", cont, cont_len))
+			stack_reverse_rotate(stack_b);
+		else if (!ft_strncmp("sa\n", cont, cont_len))
+			stack_swap(stack_a);
+		else if (!ft_strncmp("sb\n", cont, cont_len))
+			stack_swap(stack_b);
+		else if (!ft_strncmp("pa\n", cont, cont_len))
+			stack_push(stack_b, stack_a);
+		else if (!ft_strncmp("pb\n", cont, cont_len))
+			stack_push(stack_a, stack_b);
+		movs = movs->next;
+	}
+}
+
+int is_sorted_stack(t_stack stack_a, t_stack stack_b)
+{
+	t_lst	*elem;
+	
+	if (stack_b.first_elem)
+		return (0);
+	elem = stack_a.last_elem;
+	while(elem->prev)
+	{
+		if (elem->content > elem->prev->content)
+			return (0);
+		elem = elem->prev;
+	}
+	return (1);
+}
+
+int analyze_moves(int *input, t_list *mov_list, int in_size)
+{
+	t_stack	stack_a;
+	t_stack	stack_b;
+	int is_sorted;
+
+	stack_a = stack_init(STACK_A);
+	stack_b = stack_init(STACK_B);
+	stack_fill(&stack_a, input, in_size);
+	if (mov_list)
+		execute_moves(&stack_a, &stack_b, mov_list);
+	is_sorted = 0;
+	if (is_sorted_stack(stack_a, stack_b))
+		is_sorted = 1;
+	if (stack_a.first_elem)
+		stack_free(&stack_a);
+	if (stack_b.first_elem)
+		stack_free(&stack_b);
+	return (is_sorted);
 }
 
 int main(int argc, char **argv)
@@ -78,6 +140,7 @@ int main(int argc, char **argv)
 	int *input;
 	t_list *lst;
 	int size;
+	int moves_error;
 
 	size = get_input_args(argv, argc, &input);
 	if (size < 0 || has_repeted_num(input, size))
@@ -89,44 +152,19 @@ int main(int argc, char **argv)
 	}
 	else if (size == 0)
 		return (0);
-	lst = get_moves_list();
-	if (!lst)
+	moves_error = get_moves_list(&lst);
+	if (moves_error)
 	{
 		ft_putstr_fd("Error\n", STD_OUT_FD);
+		free(input);
+		free_moves_list(&lst);
 		return (0);
 	}
-
-
-	while (lst)
-	{
-		printf("->%s", (char*)lst->content);
-
-		lst = lst->next;
-	}
-
+	if (analyze_moves(input, lst, size))
+		ft_putstr_fd("OK\n", STD_OUT_FD);
+	else 
+		ft_putstr_fd("KO\n", STD_OUT_FD);
 	free(input);
 	free_moves_list(&lst);
-	
-
-
 	return (0);
 }
-
-  /*
-	char *line;
-
-	printf("\nHello World\n");
-
-	line = get_next_line(0);
-		if(line)
-			printf("%s", line);
-	while (line)
-	{
-		line = get_next_line(0);
-		if(line)
-			printf("%s", line);
-		free(line);
-	}
-
-	free(line);
-	*/

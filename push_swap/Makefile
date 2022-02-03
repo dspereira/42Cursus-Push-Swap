@@ -22,7 +22,8 @@ OBJS		= $(SRCS:.c=.o)
 
 CHECKER_SRC		= $(CHECKER) \
 				  $(INPUT_ARGS) \
-				  $(UTILS)
+				  $(UTILS) \
+				  $(STACK)
 
 CHECKER_OBJS	= $(CHECKER_SRC:.c=.o)
 
