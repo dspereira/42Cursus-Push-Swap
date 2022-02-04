@@ -6,8 +6,6 @@
 #define STD_OUT_FD 1
 
 
-
-
 void free_moves_list(t_list **lst)
 {
 	ft_lstclear(lst, &free);
@@ -15,13 +13,16 @@ void free_moves_list(t_list **lst)
 
 int is_mov_valid(char *mov)
 {
-	int len;
+	size_t len;
 
-	len = ft_strlen(mov);
+	len = ft_strlen(mov) + 1;
 	if (!ft_strncmp("ra\n", mov, len) || !ft_strncmp("rb\n", mov, len)
 		|| !ft_strncmp("sa\n", mov, len) || !ft_strncmp("sb\n", mov, len)
 		|| !ft_strncmp("pa\n", mov, len) || !ft_strncmp("pb\n", mov, len)
-		|| !ft_strncmp("rra\n", mov, len) || !ft_strncmp("rrb\n", mov, len))
+		|| !ft_strncmp("rra\n", mov, len) || !ft_strncmp("rrb\n", mov, len)
+		|| !ft_strncmp("rr\n", mov, len) || !ft_strncmp("rr\n", mov, len)
+		|| !ft_strncmp("rrr\n", mov, len) || !ft_strncmp("rrr\n", mov, len)
+		|| !ft_strncmp("ss\n", mov, len) || !ft_strncmp("ss\n", mov, len))
 	{
 		return (1);
 	}
@@ -41,7 +42,6 @@ int has_repeted_num(int *input, int size)
 
 int get_moves_list(t_list **lst)
 {
-	//t_list *lst;
 	t_list *new;
 	char *line;
 	int error;
@@ -67,33 +67,45 @@ int get_moves_list(t_list **lst)
 	return (error);
 }
 
+void execute_move(t_stack *stack_a, t_stack *stack_b, const char *cont)
+{
+	size_t cont_len;
+
+	cont_len = ft_strlen(cont) + 1;
+	if (!ft_strncmp("ra\n", cont, cont_len) 
+		|| !ft_strncmp("rr\n", cont, cont_len))
+		stack_rotate(stack_a, DONT_PRINT);
+	if (!ft_strncmp("rb\n", cont, cont_len) 
+		|| !ft_strncmp("rr\n", cont, cont_len))
+		stack_rotate(stack_b, DONT_PRINT);
+	if (!ft_strncmp("rra\n", cont, cont_len) 
+		|| !ft_strncmp("rrr\n", cont, cont_len))
+		stack_reverse_rotate(stack_a, DONT_PRINT);
+	if (!ft_strncmp("rrb\n", cont, cont_len) 
+		|| !ft_strncmp("rrr\n", cont, cont_len))
+		stack_reverse_rotate(stack_b, DONT_PRINT);
+	if (!ft_strncmp("sa\n", cont, cont_len) 
+		|| !ft_strncmp("ss\n", cont, cont_len))
+		stack_swap(stack_a, DONT_PRINT);
+	if (!ft_strncmp("sb\n", cont, cont_len) 
+		|| !ft_strncmp("ss\n", cont, cont_len))
+		stack_swap(stack_b, DONT_PRINT);
+	if (!ft_strncmp("pa\n", cont, cont_len))
+		stack_push(stack_b, stack_a, DONT_PRINT);
+	if (!ft_strncmp("pb\n", cont, cont_len))
+		stack_push(stack_a, stack_b, DONT_PRINT);
+}
+
 void execute_moves(t_stack *stack_a, t_stack *stack_b, t_list *mov_list)
 {
 	t_list *movs;
 	char *cont;
-	int cont_len;
 
 	movs = mov_list;
 	while (movs)
 	{
 		cont = movs->content;
-		cont_len = ft_strlen(movs->content);
-		if (!ft_strncmp("ra\n", cont, cont_len))
-			stack_rotate(stack_a, DONT_PRINT);
-		else if (!ft_strncmp("rb\n", cont, cont_len))
-			stack_rotate(stack_b, DONT_PRINT);
-		else if (!ft_strncmp("rra\n", cont, cont_len))
-			stack_reverse_rotate(stack_a, DONT_PRINT);
-		else if (!ft_strncmp("rrb\n", cont, cont_len))
-			stack_reverse_rotate(stack_b, DONT_PRINT);
-		else if (!ft_strncmp("sa\n", cont, cont_len))
-			stack_swap(stack_a, DONT_PRINT);
-		else if (!ft_strncmp("sb\n", cont, cont_len))
-			stack_swap(stack_b, DONT_PRINT);
-		else if (!ft_strncmp("pa\n", cont, cont_len))
-			stack_push(stack_b, stack_a, DONT_PRINT);
-		else if (!ft_strncmp("pb\n", cont, cont_len))
-			stack_push(stack_a, stack_b, DONT_PRINT);
+		execute_move(stack_a, stack_b, cont);
 		movs = movs->next;
 	}
 }
