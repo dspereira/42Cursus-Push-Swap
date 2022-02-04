@@ -11,15 +11,16 @@ void	swap_content(t_lst *elem1, t_lst *elem2)
 	elem2->content = content_tmp;
 }
 
-void	stack_swap(t_stack *stack)
+void	stack_swap(t_stack *stack, int do_print)
 {
 	if (!(stack->last_elem) || !(stack->last_elem->prev))
 		return ;
 	swap_content(stack->last_elem, stack->last_elem->prev);
-	print_mov("s", stack->id);
+	if (do_print)
+		print_mov("s", stack->id);
 }
 
-void	stack_rotate(t_stack *stack)
+void	stack_rotate(t_stack *stack, int do_print)
 {
 	t_lst	*last_temp;
 
@@ -29,10 +30,11 @@ void	stack_rotate(t_stack *stack)
 	last_temp->next = NULL;
 	list_add_front(stack, stack->last_elem);
 	stack->last_elem = last_temp;
-	print_mov("r", stack->id);
+	if (do_print)
+		print_mov("r", stack->id);
 }
 
-void	stack_reverse_rotate(t_stack *stack)
+void	stack_reverse_rotate(t_stack *stack, int do_print)
 {
 	t_lst	*first_temp;
 
@@ -42,10 +44,11 @@ void	stack_reverse_rotate(t_stack *stack)
 	first_temp->prev = NULL;
 	list_add_back(stack, stack->first_elem);
 	stack->first_elem = first_temp;
-	print_mov("rr", stack->id);
+	if (do_print)
+		print_mov("rr", stack->id);
 }
 
-void	stack_push(t_stack *stack_1, t_stack *stack_2)
+void	stack_push(t_stack *stack_1, t_stack *stack_2, int do_print)
 {
 	t_lst	*last_temp;
 
@@ -65,5 +68,6 @@ void	stack_push(t_stack *stack_1, t_stack *stack_2)
 		stack_1->first_elem = NULL;
 		stack_1->last_elem = NULL;
 	}
-	print_mov("p", stack_2->id);
+	if (do_print)
+		print_mov("p", stack_2->id);
 }

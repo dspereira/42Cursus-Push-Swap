@@ -15,11 +15,11 @@ void	sort_three_num(t_stack *stack)
 		mid = get_next_elem(top, DOWN);
 		bot = get_elem(*stack, BOT);
 		if (is_bigger(top->content, bot->content))
-			stack_rotate(stack);
+			stack_rotate(stack, DO_PRINT);
 		else if (is_bigger(top->content, mid->content))
-			stack_swap(stack);
+			stack_swap(stack, DO_PRINT);
 		else if (is_bigger(mid->content, bot->content))
-			stack_reverse_rotate(stack);
+			stack_reverse_rotate(stack, DO_PRINT);
 		i++;
 	}
 }

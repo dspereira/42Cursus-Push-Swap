@@ -79,21 +79,21 @@ void execute_moves(t_stack *stack_a, t_stack *stack_b, t_list *mov_list)
 		cont = movs->content;
 		cont_len = ft_strlen(movs->content);
 		if (!ft_strncmp("ra\n", cont, cont_len))
-			stack_rotate(stack_a);
+			stack_rotate(stack_a, DONT_PRINT);
 		else if (!ft_strncmp("rb\n", cont, cont_len))
-			stack_rotate(stack_b);
+			stack_rotate(stack_b, DONT_PRINT);
 		else if (!ft_strncmp("rra\n", cont, cont_len))
-			stack_reverse_rotate(stack_a);
+			stack_reverse_rotate(stack_a, DONT_PRINT);
 		else if (!ft_strncmp("rrb\n", cont, cont_len))
-			stack_reverse_rotate(stack_b);
+			stack_reverse_rotate(stack_b, DONT_PRINT);
 		else if (!ft_strncmp("sa\n", cont, cont_len))
-			stack_swap(stack_a);
+			stack_swap(stack_a, DONT_PRINT);
 		else if (!ft_strncmp("sb\n", cont, cont_len))
-			stack_swap(stack_b);
+			stack_swap(stack_b, DONT_PRINT);
 		else if (!ft_strncmp("pa\n", cont, cont_len))
-			stack_push(stack_b, stack_a);
+			stack_push(stack_b, stack_a, DONT_PRINT);
 		else if (!ft_strncmp("pb\n", cont, cont_len))
-			stack_push(stack_a, stack_b);
+			stack_push(stack_a, stack_b, DONT_PRINT);
 		movs = movs->next;
 	}
 }

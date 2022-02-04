@@ -23,6 +23,8 @@
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
 
+# define DO_PRINT 1
+# define DONT_PRINT 0
 # define FD 1
 
 typedef struct s_lst
@@ -51,14 +53,14 @@ void	stack_fill(t_stack *stack, int *cont, int size);
 void	stack_free(t_stack *stack);
 
 /*  stack_mov.c  */
-void	stack_swap(t_stack *stack);
-void	stack_rotate(t_stack *stack);
-void	stack_reverse_rotate(t_stack *stack);
-void	stack_push(t_stack *stack_1, t_stack *stack_2);
+void	stack_swap(t_stack *stack, int do_print);
+void	stack_rotate(t_stack *stack, int do_print);
+void	stack_reverse_rotate(t_stack *stack, int do_print);
+void	stack_push(t_stack *stack_1, t_stack *stack_2, int do_print);
 
 /*  stack_mov_2.c  */
-void	stack_rotate_mult(t_stack *stack, int n);
-void	stack_reverse_rotate_mult(t_stack *stack, int n);
+void	stack_rotate_mult(t_stack *stack, int n, int do_print);
+void	stack_reverse_rotate_mult(t_stack *stack, int n, int do_print);
 
 /*  sort_algorithm.c  */
 void	sort_three_num(t_stack *stack);

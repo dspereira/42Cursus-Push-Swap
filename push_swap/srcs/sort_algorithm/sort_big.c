@@ -9,7 +9,7 @@ void	reverse_rotate_stack(t_stack *stack, t_chunk chunk)
 	i = 0;
 	while (stack->last_elem->content != chunk.min)
 	{
-		stack_reverse_rotate(stack);
+		stack_reverse_rotate(stack, DO_PRINT);
 		i++;
 	}
 }
@@ -27,10 +27,10 @@ int	mov_a_to_b(t_stack *stack_a, t_stack *stack_b, t_chunk *ch_1, t_chunk *ch_2)
 		cont = get_elem_cont(elem);
 		if (is_part_of_chunk(cont, *ch_1) || is_part_of_chunk(cont, *ch_2))
 		{
-			stack_rotate_mult(stack_a, i);
-			stack_push(stack_a, stack_b);
+			stack_rotate_mult(stack_a, i, DO_PRINT);
+			stack_push(stack_a, stack_b, DO_PRINT);
 			if (ch_2 && is_part_of_chunk(cont, *ch_1))
-				stack_rotate(stack_b);
+				stack_rotate(stack_b, DO_PRINT);
 			return (1);
 		}
 		elem = get_next_elem(elem, DOWN);

@@ -9,5 +9,5 @@ void	sort_two_num(t_stack *stack)
 	top = get_elem_cont(get_elem(*stack, TOP));
 	bot = get_elem_cont(get_elem(*stack, BOT));
 	if (is_bigger(top, bot))
-		stack_swap(stack);
+		stack_swap(stack, DO_PRINT);
 }

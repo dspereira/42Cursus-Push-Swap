@@ -60,12 +60,12 @@ t_pos	search_elem(t_stack stack, t_chunk chunk, int (*comp)(int, int))
 void	mov_elem(t_stack *stack_a, t_stack *stack_b, t_pos p, int is_bigger)
 {
 	if (p.dir == FROM_TOP)
-		stack_rotate_mult(stack_b, p.pos);
+		stack_rotate_mult(stack_b, p.pos, DO_PRINT);
 	else
-		stack_reverse_rotate_mult(stack_b, p.pos + 1);
-	stack_push(stack_b, stack_a);
+		stack_reverse_rotate_mult(stack_b, p.pos + 1, DO_PRINT);
+	stack_push(stack_b, stack_a, DO_PRINT);
 	if (!is_bigger)
-		stack_rotate(stack_a);
+		stack_rotate(stack_a, DO_PRINT);
 }
 
 int	mov_b_to_a(t_stack *stack_a, t_stack *stack_b, t_chunk chunk)

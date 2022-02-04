@@ -51,19 +51,19 @@ void	move_smaller_elem(t_stack *stack_1, t_stack *stack_2)
 	{
 		while (pos > 0)
 		{
-			stack_rotate(stack_1);
+			stack_rotate(stack_1, DO_PRINT);
 			pos--;
 		}
-		stack_push(stack_1, stack_2);
+		stack_push(stack_1, stack_2, DO_PRINT);
 	}
 	else
 	{
 		while (pos < size)
 		{
-			stack_reverse_rotate(stack_1);
+			stack_reverse_rotate(stack_1, DO_PRINT);
 			pos++;
 		}
-		stack_push(stack_1, stack_2);
+		stack_push(stack_1, stack_2, DO_PRINT);
 	}
 }
 
@@ -73,5 +73,5 @@ void	sort_five_num(t_stack *stack_1, t_stack *stack_2)
 		move_smaller_elem(stack_1, stack_2);
 	sort_three_num(stack_1);
 	while (get_stack_size(*stack_2) > 0)
-		stack_push(stack_2, stack_1);
+		stack_push(stack_2, stack_1, DO_PRINT);
 }
