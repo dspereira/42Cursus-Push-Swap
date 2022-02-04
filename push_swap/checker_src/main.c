@@ -2,6 +2,8 @@
 #include "../includes/push_swap.h"
 #include "get_next_line.h"
 
+#include <stdio.h>
+
 #define STD_IN_FD 0
 #define STD_OUT_FD 1
 
@@ -59,7 +61,7 @@ int get_moves_list(t_list **lst)
 		}
 		else 
 		{
-			free_moves_list(lst);
+			free(line);
 			error = 1;
 			break;
 		}
@@ -137,9 +139,9 @@ int analyze_moves(int *input, t_list *mov_list, int in_size)
 	stack_fill(&stack_a, input, in_size);
 	if (mov_list)
 		execute_moves(&stack_a, &stack_b, mov_list);
-	is_sorted = 0;
-	if (is_sorted_stack(stack_a, stack_b))
-		is_sorted = 1;
+	is_sorted = is_sorted_stack(stack_a, stack_b);
+	//if (is_sorted_stack(stack_a, stack_b))
+	//	is_sorted = 1;
 	if (stack_a.first_elem)
 		stack_free(&stack_a);
 	if (stack_b.first_elem)
@@ -149,16 +151,18 @@ int analyze_moves(int *input, t_list *mov_list, int in_size)
 
 int main(int argc, char **argv)
 {
+
 	int *input;
 	t_list *lst;
 	int size;
 	int moves_error;
 
+	input = 0;
 	size = get_input_args(argv, argc, &input);
 	if (size < 0 || has_repeted_num(input, size))
 	{
 		ft_putstr_fd("Error\n", STD_OUT_FD);
-		if (size > 0)
+		if (input)
 			free(input);
 		return (0);
 	}
@@ -178,5 +182,6 @@ int main(int argc, char **argv)
 		ft_putstr_fd("KO\n", STD_OUT_FD);
 	free(input);
 	free_moves_list(&lst);
+
 	return (0);
 }

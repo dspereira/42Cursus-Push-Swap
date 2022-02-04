@@ -1,6 +1,8 @@
 #include "../../includes/push_swap.h"
 #include "get_input_args_utils.h"
 
+#include <stdio.h>
+
 void	free_matrix(char **m, int size)
 {
 	int	i;
@@ -58,8 +60,10 @@ int	is_range_int(long int nb)
 int	is_numeric(char *str)
 {
 	int	i;
-
+	
 	i = 0;
+	if (str[0] == '\0')
+		return (0);
 	while (str[i] != '\0')
 	{
 		if (i == 0 && (str[i] == '-' || str[i] == '+'))
