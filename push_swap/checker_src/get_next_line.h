@@ -6,7 +6,7 @@
 /*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 10:05:12 by diogo             #+#    #+#             */
-/*   Updated: 2022/02/02 11:55:50 by diogo            ###   ########.fr       */
+/*   Updated: 2022/02/07 10:30:25 by diogo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,5 @@ int		read_file(int fd, char *buff);
 char	*line_cat(char *line, char *buff, int n);
 void	update_buffer(char *buff, char *src);
 int		get_char(const char *s, int c);
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-void	ft_bzero(void *s, size_t n);
 
 #endif

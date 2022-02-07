@@ -27,8 +27,8 @@ CHECKER_SRC		= $(CHECKER) \
 
 CHECKER_OBJS	= $(CHECKER_SRC:.c=.o)
 
-CC			= gcc
-CFLAGS		=  -I./includes
+CC			= gcc 
+CFLAGS		=  -Wall -Wextra -Werror -I./includes
 RM			= rm -f
 
 MAKE_LIBFT		= make bonus -C libft/

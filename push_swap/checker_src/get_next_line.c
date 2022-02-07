@@ -6,11 +6,12 @@
 /*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 10:02:59 by diogo             #+#    #+#             */
-/*   Updated: 2022/02/02 12:06:16 by diogo            ###   ########.fr       */
+/*   Updated: 2022/02/07 17:15:58 by diogo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "checker.h"
 
 char	*get_next_line(int fd)
 {
