@@ -6,6 +6,7 @@
 
 # define STD_IN_FD 0
 # define STD_OUT_FD 1
+# define STD_ERR_FD 2
 
 void	free_mem(t_list **movs, int *num_list);
 int		is_mov_valid(char *mov);

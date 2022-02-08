@@ -39,7 +39,7 @@ void	push_swap(int in_size, char **in)
 	size = get_input_args(in, in_size, &in_arr);
 	if (size < 0)
 	{
-		ft_putstr_fd("Error\n", FD);
+		ft_putstr_fd("Error\n", STD_ERR_FD);
 		return ;
 	}
 	else if (size == 0)
@@ -47,7 +47,7 @@ void	push_swap(int in_size, char **in)
 	in_arr_sort = input_array_sort(in_arr, size);
 	if (input_check_repeted_num(in_arr_sort, size))
 	{
-		ft_putstr_fd("Error\n", FD);
+		ft_putstr_fd("Error\n", STD_ERR_FD);
 		free_inp(in_arr, in_arr_sort);
 		return ;
 	}

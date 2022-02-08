@@ -105,10 +105,10 @@ int	main(int argc, char **argv)
 	if (size <= 0 || has_repeted_num(input, size))
 	{
 		if (size != 0)
-			ft_putstr_fd("Error\n", STD_OUT_FD);
+			ft_putstr_fd("Error\n", STD_ERR_FD);
 	}
 	else if (get_movs_list(&lst))
-		ft_putstr_fd("Error\n", STD_OUT_FD);
+		ft_putstr_fd("Error\n", STD_ERR_FD);
 	else if (analyze_movs(input, lst, size))
 		ft_putstr_fd("OK\n", STD_OUT_FD);
 	else

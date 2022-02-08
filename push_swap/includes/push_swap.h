@@ -25,7 +25,10 @@
 
 # define DO_PRINT 1
 # define DONT_PRINT 0
-# define FD 1
+
+# define STD_IN_FD 0
+# define STD_OUT_FD 1
+# define STD_ERR_FD 2
 
 typedef struct s_lst
 {
