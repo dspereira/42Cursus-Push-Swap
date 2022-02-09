@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_input_args_utils.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsilveri <dsilveri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/09 15:54:59 by dsilveri          #+#    #+#             */
+/*   Updated: 2022/02/09 15:55:56 by dsilveri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/push_swap.h"
 #include "get_input_args_utils.h"
 
@@ -60,7 +72,7 @@ int	is_range_int(long int nb)
 int	is_numeric(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	if (str[0] == '\0')
 		return (0);
