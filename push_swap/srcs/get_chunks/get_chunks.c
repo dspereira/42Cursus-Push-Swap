@@ -6,7 +6,7 @@
 /*   By: dsilveri <dsilveri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:52:14 by dsilveri          #+#    #+#             */
-/*   Updated: 2022/02/09 15:52:18 by dsilveri         ###   ########.fr       */
+/*   Updated: 2022/02/10 11:45:18 by dsilveri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int	get_chunks(t_chunk *chunk, int *num_list, int size)
 		num_chunks = 2;
 	else if (size >= 50 && size < 250)
 		num_chunks = 6;
-	else if (size >= 250)
+	else if (size >= 250 && size < 2000)
 		num_chunks = 16;
+	else if (size >= 2000)
+		num_chunks = 100;
 	div = size / num_chunks;
 	count = 0;
 	while (count < num_chunks)

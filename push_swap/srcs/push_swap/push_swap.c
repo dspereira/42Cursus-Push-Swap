@@ -6,7 +6,7 @@
 /*   By: dsilveri <dsilveri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:57:58 by dsilveri          #+#    #+#             */
-/*   Updated: 2022/02/09 15:58:40 by dsilveri         ###   ########.fr       */
+/*   Updated: 2022/02/10 11:39:26 by dsilveri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	stack_sort(int *in_arr, int *in_arr_sort, int size_arr)
 {
 	t_stack	stack_a;
 	t_stack	stack_b;
-	t_chunk	chunk[20];
+	t_chunk	chunk[150];
 	int		num_chunks;
 
 	stack_a = stack_init(STACK_A);

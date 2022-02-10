@@ -47,7 +47,7 @@ int is_repeated(int *arr, int num, int size)
 
 int main(int argc, char **argv)
 {
-    int arr [1000];
+    int arr [100000];
     int i;
     int num;
     int size;
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
     srand(time(NULL));
     while (i < size)
     {
-        num = rand() % 999;
+        num = rand() % 100000;
         if ((rand() % 10) % 2 == 0)
             num *= -1;
         if (!is_repeated(arr, num, i+1))
