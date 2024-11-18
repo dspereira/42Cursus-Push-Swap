@@ -41,6 +41,8 @@ Examples:
 ARG="3 2 1 0"; ./push_swap $ARG | ./checker $ARG
 ```
 
-## License
+## Example
+![push_swap](https://github.com/dspereira/42Cursus-Push-Swap/blob/main/example.png)
 
+## License
 This project is licensed under the [MIT License](https://github.com/dspereira/42Cursus-Push-Swap/blob/main/LICENSE).
