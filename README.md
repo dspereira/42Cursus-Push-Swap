@@ -18,6 +18,7 @@ Usage example:
 ```shell
 ./push_swap [list of numbers]
 ```
+Example: ./push_swap 2 1 3 6 5 8
 
 ## License
 
