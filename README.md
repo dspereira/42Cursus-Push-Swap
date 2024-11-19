@@ -85,10 +85,11 @@ The last element becomes the first one.
 ![push_swap](https://github.com/dspereira/42Cursus-Push-Swap/blob/main/example.png)
 
 ## Visual Demo
+Check the visualizer app [here](https://push-swap-visualizer.vercel.app/).
+
+Check the visualizer GitHub repo [here](https://github.com/oyhoyhk/push_swap_visualizer_react).
+
 https://github.com/user-attachments/assets/33b507c9-0ec9-414f-84dd-5f8b263b6f4a
-
-
-
 
 ## License
 This project is licensed under the [MIT License](https://github.com/dspereira/42Cursus-Push-Swap/blob/main/LICENSE).
