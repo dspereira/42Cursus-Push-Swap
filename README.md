@@ -84,5 +84,11 @@ The last element becomes the first one.
 ## Example
 ![push_swap](https://github.com/dspereira/42Cursus-Push-Swap/blob/main/example.png)
 
+## Visual Demo
+https://github.com/user-attachments/assets/33b507c9-0ec9-414f-84dd-5f8b263b6f4a
+
+
+
+
 ## License
 This project is licensed under the [MIT License](https://github.com/dspereira/42Cursus-Push-Swap/blob/main/LICENSE).
