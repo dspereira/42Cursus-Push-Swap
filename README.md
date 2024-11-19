@@ -8,6 +8,13 @@ Additionally, a checker program has been implemented. This checker receives the 
 
 For more informations see the project [subject](https://github.com/dspereira/42Cursus-Push-Swap/blob/main/subject.pdf).
 
+## Table of Content
+* [Installation / Usage](#installation--usage)
+* [Movements](#movements)
+* [Example](#example)
+* [Visual Demo](#visual-demo)
+* [License](#license)
+  
 ## Installation / Usage
 This project is designed to work on Linux and macOS.
 
